@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class UserController{
 
+	@GetMapping("/landing")
+	public String landing()
+	{
+		return "landing";
+	}
 	@GetMapping("/register")
 	public String registerUser()
 	{
