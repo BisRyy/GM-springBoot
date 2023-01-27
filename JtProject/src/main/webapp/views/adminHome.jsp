@@ -1,101 +1,145 @@
-<!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-	crossorigin="anonymous">
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
-	crossorigin="anonymous">
-<title>Document</title>
+	<!-- Meta Tags -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Title -->
+	<title>GM - Admin</title>
+	<!-- Style Sheet -->
+	<link rel="stylesheet" type="text/css" href="../views/css/astyle.css" />
 </head>
+<body>
 
-<body class="bg-dark">
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#"> <img
-				src="../static/images/logo.png" width="auto" height="40"
-				class="d-inline-block align-top" alt="" />
-			</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+<header>
+	<div class="container">
+		<div class="brand">
+			<div class="logo">
+				<a href="index">
+					<img src="../views/img/icons/online_shopping.png">
+					<div class="logo-text">
+						<p class="big-logo">Grain Mill</p>
+						<p class="small-logo">Market&Delivery</p>
+					</div>
+				</a>
+			</div> <!-- logo -->
+			<div class="shop-icon">
+				<div class="dropdown">
+					<img src="../views/img/icons/account.png">
+					<div class="dropdown-menu">
+						<ul>
+							<li><a href="#">My Account</a></li>
+							<li><a href="#">Settings</a></li>
+							<li><a href="#">Logout</a></li>
+						</ul>
+					</div>
+				</div>
+			</div> <!-- shop icons -->
+		</div> <!-- brand -->
+	</div> <!-- container -->
+</header> <!-- header -->
 
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav mr-auto"></ul>
-				<ul class="navbar-nav">
-					<li class="nav-item active"><a class="nav-link" href="/adminhome">Home
-							Page</a></li>
-					<li class="nav-item active"><a class="nav-link" href="/logout">Logout</a></li>
+<main>
 
-				</ul>
-
-			</div>
+	<div class="main-content">
+		<div class="sidebar">
+			<h3>Menu</h3>
+			<ul>
+				<li><a class="active" href="adminhome">Home</a></li>
+				<li><a href="orders">Order</a></li>
+				<li><a href="addProduct">Product</a></li>
+				<li><a href="addCategory">Category</a></li>
+				<li><a href="addStock">Stock</a></li>
+				<li><a href="users">Users</a></li>
+			</ul>
 		</div>
-	</nav>
-	<div class="jumbotron text-center">
-		<h1 class="display-4">Welcome Back, Admin</h1><hr>
-		<p>Manage your data from this Admin Panel</p>
-	</div><br>
-	<div class="container-fluid" >
-		<div class="row justify-content-center">
-			<div class="col-sm-3 pt-4">
-				<div class="card border border-info" style="background-color: white;">
-					<div class="card-body text-center">
-						<h4 class="card-title">Categories</h4>
-						<p>---------------------------------------------</p>
-						<p class="card-text">Manage the categories section here.</p>
-						<a href="/admin/categories" class="card-link btn btn-primary">Manage</a>
-
-					</div>
+		<div class="content dashboard">
+			<h3>Dashboard</h3>
+			<div class="content-data">
+				<div class="content-detail">
+					<h4>Low Stock Report</h4>
+					<table>
+						<thead>
+						<tr>
+							<th>Product</th>
+							<th>Price</th>
+							<th>Category</th>
+							<th>Qty</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td>Blue Jeans</td>
+							<td>1500</td>
+							<td>Pants</td>
+							<td>2</td>
+						</tr>
+						</tbody>
+					</table>
 				</div>
-			</div>
-			<div class="col-sm-3 pt-4">
-				<div class="card" style="background-color: white;">
-					<div class="card-body text-center">
-						<h4 class="card-title">Products</h4>
-						<p>---------------------------------------------</p>
-						<p class="card-text">Manage all the products here.</p>
-						<a href="/admin/products" class="card-link btn btn-primary">Manage</a>
-
-					</div>
+				<div class="content-detail">
+					<h4>Recent Order</h4>
+					<table>
+						<thead>
+						<tr>
+							<th>Date</th>
+							<th>Order Ref#</th>
+							<th>User</th>
+							<th>Amount</th>
+							<th>View</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td>11-05-2020</td>
+							<td>15895452</td>
+							<td>Kamran</td>
+							<td>1500</td>
+							<td>View</td>
+						</tr>
+						</tbody>
+					</table>
 				</div>
-			</div>
-			<div class="col-sm-3 pt-4">
-				<div class="card" style="background-color: white;">
-					<div class="card-body text-center">
-						<h4 class="card-title">Customers</h4>
-						<p>---------------------------------------------</p>
-						<p class="card-text">Manage all the customer here.</p>
-						<a href="/admin/customers" class="card-link btn btn-primary">Manage</a>
-
-					</div>
+				<div class="content-detail">
+					<h4>Completed Order</h4>
+					<table>
+						<thead>
+						<tr>
+							<th>Date</th>
+							<th>Order Ref#</th>
+							<th>User</th>
+							<th>Amount</th>
+							<th>View</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td>11-05-2020</td>
+							<td>15895452</td>
+							<td>Kamran</td>
+							<td>1500</td>
+							<td>View</td>
+						</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
 	</div>
 
+</main> <!-- Main Area -->
 
+<footer>
+	<div class="container">
+		<div class="footer-bar">
+			<div class="copyright-text">
+				<p>Copryright 2020 - All Rights Reserved</p>
+			</div>
+		</div> <!-- Footer Bar -->
+	</div>
+</footer> <!-- Footer Area -->
 
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-		crossorigin="anonymous"></script>
 </body>
+
 </html>

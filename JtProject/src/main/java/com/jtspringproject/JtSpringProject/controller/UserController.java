@@ -23,17 +23,66 @@ public class UserController{
 	{
 		return "register";
 	}
+	@GetMapping("/shop")
+	public String getShop()
+	{
+		return "shop";
+	}
+	@GetMapping("/about")
+	public String getAbout()
+	{
+		return "about";
+	}
 	@GetMapping("/contact")
 	public String contact()
 	{
 		return "contact";
+	}
+	@GetMapping("/account")
+	public String account()
+	{
+		return "updateProfile";
+	}
+	@GetMapping("/refund")
+	public String refund()
+	{
+		return "refund";
+	}
+	@GetMapping("/terms")
+	public String terms()
+	{
+		return "terms";
+	}
+	@GetMapping("/cart")
+	public String cart()
+	{
+		return "cart";
 	}
 	@GetMapping("/buy")
 	public String buy()
 	{
 		return "buy";
 	}
-	
+	@GetMapping("/order")
+	public String orders()
+	{
+		return "order";
+	}
+	@GetMapping("/product")
+	public String product()
+	{
+		return "product";
+	}
+	@GetMapping("/products")
+	public String products()
+	{
+		return "uproducts";
+	}
+	@GetMapping("/checkout")
+	public String getCheckout()
+	{
+		return "checkout";
+	}
 	@GetMapping("/user/products")
 	public String getproduct(Model model) {
 		return "uproduct";
@@ -59,7 +108,7 @@ public class UserController{
 		catch(Exception e)
 		{
 			String str1 = e.toString();
-			String check = "Access denied for user 'rot'@'localhost' (using password: NO)";
+			String check = "Access denied for user 'root'@'localhost' (using password: NO)";
 			if(str1.contains(check)) {
 				return "redirect:/";
 			}

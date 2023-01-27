@@ -28,7 +28,6 @@ public class AdminController {
 
     @GetMapping("/template")
     public String getTemplate(Model model) {
-
         return "template";
     }
 
@@ -43,7 +42,6 @@ public class AdminController {
 
     @GetMapping("/userloginvalidate")
     public String userlog(Model model) {
-
         return "userLogin";
     }
 
@@ -86,7 +84,6 @@ public class AdminController {
 
     @GetMapping("/loginvalidate")
     public String adminlog(Model model) {
-
         return "adminlogin";
     }
 
@@ -105,6 +102,26 @@ public class AdminController {
     @GetMapping("/admin/categories")
     public String getcategory() {
         return "categories";
+    }
+    @GetMapping("/addCategory")
+    public String addCategory() {
+        return "addCategory";
+    }
+    @GetMapping("/addProduct")
+    public String addProduct() {
+        return "addProduct";
+    }
+    @GetMapping("/addStock")
+    public String addStock() {
+        return "addStock";
+    }
+    @GetMapping("/users")
+    public String getUsers() {
+        return "users";
+    }
+    @GetMapping("/orders")
+    public String getOrders() {
+        return "orders";
     }
 
     @RequestMapping(value = "admin/sendcategory", method = RequestMethod.GET)

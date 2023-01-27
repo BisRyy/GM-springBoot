@@ -19,8 +19,8 @@
 <body class="bg-light">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#"> <img src="@{/images/logo.png}"
-				src="../static/images/logo.png" width="auto" height="40"
+			<a class="navbar-brand" href="#"> <img src="../images/unamed.jpg"
+				src="../images/unamed.jpg" width="auto" height="40"
 				class="d-inline-block align-top" alt="" />
 			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"

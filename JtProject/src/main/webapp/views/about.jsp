@@ -11,22 +11,10 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-              integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-              integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-
-
     <title>GM - Home</title>
 
     <link rel="stylesheet" type="text/css" href="../views/css/style.css" />
 
-    <script type="text/javascript" src="../views/js/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
     <script>
         $(document).ready(function(){
             $('.slider').bxSlider({
@@ -48,8 +36,8 @@
                 <a href="/home">
                     <img src="../views/img/icons/online_shopping.png">
                     <div class="logo-text">
-                        <p class="big-logo" style="line-height: 1;">Grain Mill</p>
-                        <p class="small-logo" style="line-height: 1;">market  & delivery</p>
+                        <p class="big-logo" >Grain Mill</p>
+                        <p class="small-logo" >market & delivery</p>
                     </div>
                 </a>
             </div> <!-- logo -->
@@ -71,7 +59,10 @@
 
 <div class="container" >
     <main >
-
+        <div class="about">
+            <h2 class="heading">About</h2>
+            <p>Lorem ipsum dolor, sit amet consectetur, adipisicing elit. Odit quas animi, unde? Autem at pariatur quia laboriosam soluta, quibusdam voluptates incidunt quos eligendi architecto tenetur, amet, cupiditate in recusandae, sint quaerat sunt reiciendis voluptatum repudiandae similique odio molestiae laudantium. Fugit illum voluptatum esse facilis, omnis dolorum amet ut sed ea magnam vitae quaerat dolor. Cum dolorum ducimus similique nostrum laudantium pariatur, repudiandae, libero ratione id ut culpa ea consequuntur quia totam magnam quasi quis doloremque dolor quibusdam tenetur asperiores reiciendis! Cupiditate illum, praesentium facere quibusdam minima facilis quam voluptatem, in vel tenetur dolores repellat assumenda ducimus quas distinctio sequi ab numquam sunt laudantium voluptatibus modi dolor at nulla. Amet accusamus officiis itaque reiciendis architecto repellat, suscipit? Modi distinctio rerum voluptatum, natus, ad repellendus corporis adipisci veritatis aliquam, commodi sed non recusandae nesciunt facere mollitia optio, ipsa eligendi minus sequi amet? Officiis distinctio mollitia, laborum beatae deleniti sint, ipsa soluta similique?</p>
+        </div>
     </main> <!-- Main Area -->
 </div>
 

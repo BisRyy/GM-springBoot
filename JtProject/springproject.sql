@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `categories` (
-  `categoryid` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -36,10 +36,10 @@ CREATE TABLE `categories` (
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`categoryid`, `name`) VALUES
-(6, 'category6'),
-(8, 'category7'),
-(11, 'fruit');
+INSERT INTO `categories` (`category_id`, `name`) VALUES
+(0, 'grain'),
+(1, 'milled'),
+(2, 'rice');
 
 -- --------------------------------------------------------
 
@@ -69,11 +69,10 @@ INSERT INTO `login` (`id`, `password`, `username`) VALUES
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `image` text NOT NULL,
-  `categoryid` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
   `price` int(11) NOT NULL,
-  `weight` int(11) NOT NULL,
+  `image` text DEFAULT 'unamed.jpg',
+  `category_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -81,10 +80,10 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `image`, `categoryid`, `quantity`, `price`, `weight`, `description`) VALUES
-(14, 'dfgdg', '1.jpg', 6, 7275275, 24, 27, ''),
-(15, 'dfgdg', '2.jpg', 6, 7275275, 24, 27, ''),
-(16, 'apple', '', 11, 5, 30, 10, 'red python');
+INSERT INTO `products` (`id`, `name`, `price`, `image`, `category_id`, `quantity`, `description`) VALUES
+(12, 'Key Teff', 5200, '1.jpg', 0, 200, 'Magna teff'),
+(13, 'Nech Teff', 6000, '1.jpg', 0, 200, 'Ke Merkato'),
+(14, 'Magna Teff', 5500, '1.jpg', 0, 200, 'Ke Megenagna');
 
 -- --------------------------------------------------------
 
@@ -94,7 +93,9 @@ INSERT INTO `products` (`id`, `name`, `image`, `categoryid`, `quantity`, `price`
 
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
-  `username` varchar(45) NOT NULL,
+  `f_name` varchar(45) NOT NULL,
+  `l_name` varchar(45) NOT NULL,
+  `username` varchar(15) NOT NULL,
   `password` varchar(64) NOT NULL,
   `role` varchar(45) NOT NULL,
   `enabled` tinyint(4) DEFAULT NULL,
@@ -106,8 +107,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `role`, `enabled`, `email`) VALUES
-(1, 'jay', '123', 'ROLE_USER', 1, 'gajerajay9@gmail.com'),
-(2, 'admin', '123', 'ROLE_ADMIN', 1, '20ceuos042@ddu.ac.in');
+(1, 'user', '123', 'ROLE_USER', 1, 'user@gmail.com'),
+(2, 'admin', '123', 'ROLE_ADMIN', 1, 'admin@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -162,13 +163,13 @@ ALTER TABLE `users`
 -- Constraints for table `products`
 --
 ALTER TABLE `products`
-  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`categoryid`) REFERENCES `categories` (`categoryid`) ON DELETE CASCADE;
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`) ON DELETE CASCADE;
 COMMIT;
 
 ALTER TABLE `users` 
 CHANGE COLUMN `role` `role` VARCHAR(250) NULL;
 
-ALTER TABLE `users` CHANGE COLUMN `role` `role` VARCHAR(250) NOT NULL DEFAULT 'ROLE_USERS';
+ALTER TABLE `users` CHANGE COLUMN `role` `role` VARCHAR(250) NOT NULL DEFAULT 'ROLE_USER';
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

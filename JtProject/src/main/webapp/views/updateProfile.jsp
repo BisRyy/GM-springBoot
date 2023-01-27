@@ -1,67 +1,273 @@
-<!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
+    <!-- Meta Tags -->
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title -->
+    <title>E-Commerce Online Shop</title>
+    <!-- Style Sheet -->
+    <link rel="stylesheet" type="text/css" href="../views/css/style.css" />
+    <!-- Javascript -->
+    <script type="text/javascript" src="../views/js/jquery.min.js"></script>
 </head>
 <body>
 
-<br>
-<div class="container">
-    <div class="col-sm-6">
-        <h3 style="margin-top: 10px">User Profile</h3>
-        <br>
-        <form action="updateuser" method="post">
-            <div class="form-group">
-                <label for="firstName">User Name</label>
-                <input type="hidden" name="userid" value="${userid }">
-                <input type="text" name="username" id="firstName" required placeholder="Your Username*" value="${username }" required class="form-control form-control-lg">
-            </div>
-            <div class="form-group">
-                <label for="email">Email address</label>
-                <input type="email" class="form-control form-control-lg" required minlength="6" placeholder="Email*" value="${email }" required name="email" id="email"
-                       aria-describedby="emailHelp">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with
-                    anyone else.</small>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control form-control-lg" required placeholder="Password*" value="${password }" required name="password"
-                       id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*?[~`!@#$%\^&*()\-_=+[\]{};:\x27.,\x22\\|/?><]).{8,}" 
-                       title="Must contain: at least one number, one uppercase letter, one lowercase letter, 
-                       one special character, and 8 or more characters" required>
-                       <input type="checkbox" onclick="showPassword()">Show Password
-            </div>
-            <div class="form-group">
-                <label for="Address">Address</label>
-                <textarea class="form-control form-control-lg" rows="3" placeholder="Enter Your Address" name="address">${address }</textarea>
-            </div>
+<header>
+    <div class="container">
+        <div class="brand">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="../views/img/icons/online_shopping.png">
+                    <div class="logo-text">
+                        <p class="big-logo">Grain Mill</p>
+                        <p class="small-logo">market&delivery</p>
+                    </div>
+                </a>
+            </div> <!-- logo -->
+            <div class="shop-icon">
+                <div class="dropdown">
+                    <img src="../views/img/icons/account.png">
+                    <div class="dropdown-menu">
+                        <ul>
+                            <li><a href="account.html">My Account</a></li>
+                            <li><a href="orders.html">My Orders</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <img src="../views/img/icons/heart.png">
+                    <div class="dropdown-menu wishlist-item">
+                        <table border="1">
+                            <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Product Name</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><img src="../views/img/product/img1.jpg"></td>
+                                <td>product name</td>
+                            </tr>
+                            <tr>
+                                <td><img src="../views/img/product/img2.jpg"></td>
+                                <td>product name</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <img src="../views/img/icons/shopping_cart.png">
+                    <div class="dropdown-menu cart-item">
+                        <table border="1">
+                            <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Product Name</th>
+                                <th class="center">Price</th>
+                                <th class="center">Qty.</th>
+                                <th class="center">Amount</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><img src="../views/img/product/img1.jpg"></td>
+                                <td>product name</td>
+                                <td class="center">1200</td>
+                                <td class="center">2</td>
+                                <td class="center">2400</td>
+                            </tr>
+                            <tr>
+                                <td><img src="../views/img/product/img2.jpg"></td>
+                                <td>product name</td>
+                                <td class="center">1500</td>
+                                <td class="center">2</td>
+                                <td class="center">3000</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> <!-- shop icons -->
+        </div> <!-- brand -->
 
-            <input type="submit" value="Update Profile" class="btn btn-primary btn-block"><br>
-            
-        </form>
-    </div>
+        <div class="menu-bar">
+            <div class="menu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="search-bar">
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="search" placeholder="Search">
+                        <img src="../views/img/icons/search.png">
+                    </div>
+                </form>
+            </div>
+        </div> <!-- menu -->
+    </div> <!-- container -->
+</header> <!-- header -->
+
+<div class="container">
+    <main>
+        <div class="breadcrumb">
+            <ul>
+                <li><a href="index">Home</a></li>
+                <li> / </li>
+                <li>Account</li>
+            </ul>
+        </div> <!-- End of Breadcrumb-->
+
+        <div class="account-page">
+            <div class="profile">
+                <div class="profile-img">
+                    <img src="../views/img/product/img5.jpg">
+                    <h2>John Doe</h2>
+                    <p>john_doe@mail.com</p>
+                </div>
+                <ul>
+                    <li><a href="account" class="active">Account <span>></span></a></li>
+                    <li><a href="order">My Orders <span>></span></a></li>
+                    <li><a href="change-password">Change Password <span>></span></a></li>
+                    <li><a href="logout">Logout <span>></span></a></li>
+                </ul>
+            </div>
+            <div class="account-detail">
+                <h2>Account</h2>
+                <div class="billing-detail">
+                    <form class="checkout-form" action="updateuser" method="post">
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" id="fname" name="fname" value="${username}">
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" id="lname" name="lname" value="Doe">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Company Name (Optional)</label>
+                            <input type="text" id="cname" name="cname">
+                        </div>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <select id="country" name="country">
+                                    <option selected>---Select a Country---</option>
+                                    <option value="pakistan">Pakistan</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <select id="city" name="city">
+                                    <option selected>---Select a City---</option>
+                                    <option value="karachi">Karachi</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <textarea style="resize:none" id="address" name="address" rows="3">${address} </textarea>
+                        </div>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <label for="useremail">Email</label>
+                                <input type="email" id="useremail" name="email" value="${email}">
+                            </div>
+                            <div class="form-group">
+                                <label>Mobile</label>
+                                <input type="text" id="mobile" name="mobile" minlength="11" maxlength="11" value="555-XXXXXXX">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label></label>
+                            <input type="submit" id="update" name="update" value="Update">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main> <!-- Main Area -->
 </div>
 
-<script>
-    function showPassword() {
-  var x = document.getElementById("password");
-  if (x.type === "password") {
-    x.type = "text";
-  } else {
-    x.type = "password";
-  }
-}
-</script>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<footer>
+    <div class="container">
+        <div class="footer-widget">
+            <div class="widget">
+                <div class="widget-heading">
+                    <h3>Important Link</h3>
+                </div>
+                <div class="widget-content">
+                    <ul>
+                        <li><a href="about">About</a></li>
+                        <li><a href="contact">Contact</a></li>
+                        <li><a href="refund">Refund Policy</a></li>
+                        <li><a href="terms">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="widget">
+                <div class="widget-heading">
+                    <h3>Information</h3>
+                </div>
+                <div class="widget-content">
+                    <ul>
+                        <li><a href="account">My Account</a></li>
+                        <li><a href="orders">My Orders</a></li>
+                        <li><a href="cart">Cart</a></li>
+                        <li><a href="checkout">Checkout</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="widget">
+                <div class="widget-heading">
+                    <h3>Follow us</h3>
+                </div>
+                <div class="widget-content">
+                    <div class="follow">
+                        <ul>
+                            <li><a href="#"><img src="../views/img/icons/facebook.png" alt=""></a></li>
+                            <li><a href="#"><img src="../views/img/icons/twitter.png" alt=""></a></li>
+                            <li><a href="#"><img src="../views/img/icons/instagram.png" alt=""></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="widget-heading">
+                    <h3>Subscribe for Newsletter</h3>
+                </div>
+                <div class="widget-content">
+                    <div class="subscribe">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="subscribe" placeholder="Email">
+                                <img src="../views/img/icons/paper_plane.png">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- Footer Widget -->
+        <div class="footer-bar">
+            <div class="copyright-text">
+                <p>Copyright 2021 - All Rights Reserved</p>
+            </div>
+            <div class="payment-mode">
+                <img src="../views/img/icons/paper_money.png">
+                <img src="../views/img/icons/visa.png">
+                <img src="../views/img/icons/mastercard.png">
+            </div>
+        </div> <!-- Footer Bar -->
+    </div>
+</footer> <!-- Footer Area -->
+
 </body>
+
 </html>
