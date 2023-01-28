@@ -1,7 +1,5 @@
 package com.jtspringproject.JtSpringProject.objects;
 
-import java.util.Scanner;
-
 public class SellerLogIn extends LogIn {
     Seller seller;
 
@@ -15,7 +13,7 @@ public class SellerLogIn extends LogIn {
     }
 
     public Seller getSeller() {
-        return new Seller("001", "Debebe", "AASTU 101 road", "Debebe@debe.com", "+2519555555");
+        return new Seller();
 
     }
 }

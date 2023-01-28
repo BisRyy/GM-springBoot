@@ -21,7 +21,7 @@ public class BuyerMenu {
                     System.out.println(buyer.getEmail());
                     break;
                 case 2 :
-                    System.out.println(buyer.getPhoneNumber());
+                    System.out.println(buyer.getPhone());
                     break;
                 case 3 :
                     System.out.println("View Orders");

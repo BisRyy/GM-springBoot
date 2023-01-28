@@ -1,5 +1,6 @@
 package com.jtspringproject.JtSpringProject.controller;
 
+import com.jtspringproject.JtSpringProject.objects.Buyer;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,16 +12,18 @@ public class AdminController {
     int adminlogcheck = 0;
     String usernameforclass = "";
 
+    Buyer currentUser = new Buyer();
+
     @RequestMapping(value = {"/", "/home"})
     public String returnHome() {
         return "home";
     }
 
-
     @RequestMapping(value = {"/logout"})
     public String returnIndex() {
         adminlogcheck = 0;
         usernameforclass = "";
+        currentUser = new Buyer();
         return "userLogin";
     }
 
@@ -33,7 +36,7 @@ public class AdminController {
     public String index(Model model) {
         if (usernameforclass.equalsIgnoreCase("")) return "userLogin";
         else {
-            model.addAttribute("username", usernameforclass);
+            model.addAttribute("username", currentUser.getUsername());
             return "index";
         }
     }
@@ -44,14 +47,17 @@ public class AdminController {
     }
 
     @RequestMapping(value = "userloginvalidate", method = RequestMethod.POST)
-    public String userlogin(@RequestParam("username") String username, @RequestParam("password") String pass, Model model) {
+    public String userlogin(@RequestParam("username") String username,
+                            @RequestParam("password") String pass,
+                            Model model) {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/springproject", "bisry", "password");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/grainmill", "bisry", "password");
             Statement stmt = con.createStatement();
             ResultSet rst = stmt.executeQuery("select * from users where username = '" + username + "' and password = '" + pass + "' ;");
             if (rst.next()) {
+                currentUser.setUsername(rst.getString(2));
                 usernameforclass = rst.getString(2);
                 return "redirect:/index";
             } else {
@@ -63,8 +69,6 @@ public class AdminController {
             System.out.println("Exception:" + e);
         }
         return "userLogin";
-
-
     }
 
 

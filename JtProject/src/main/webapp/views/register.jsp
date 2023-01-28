@@ -11,13 +11,13 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+<%--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"--%>
+<%--          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">--%>
+<%--    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"--%>
+<%--          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">--%>
+<%--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>--%>
+<%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>--%>
+<%--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>--%>
 
     <title>GM - Register</title>
 
@@ -67,46 +67,56 @@
 </header> <!-- header -->
 
 
-
-<div class="container" >
-    <main style="background: lightblue;">
-
-
-        <div class="container">
-            <div class="col-sm-6">
-                <h3 style="margin-top: 10px">Sign Up Now</h3>
-                <p>Please fill out this to register</p>
-                <form action="newuserregister" method="post">
-                    <div class="form-group">
-                        <label for="firstName">User Name</label>
-                        <input type="text" name="username" id="firstName" required placeholder="Your Username*" required class="form-control form-control-lg">
+<div class="container" style="align-content: center;">
+    <main style="width: 80%;">
+        <div class="account-detail">
+            <h2>Create New Account</h2>
+            <div class="billing-detail">
+                <form class="checkout-form" action="newuserregister" method="post">
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label for="username">User Name (Required)</label>
+                            <input type="text" id="username" name="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age (Required)</label>
+                            <input type="number" id="age" name="age" min="18" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input type="email" class="form-control form-control-lg" required minlength="6" placeholder="Email*" required name="email" id="email"
-                               aria-describedby="emailHelp">
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with
-                            anyone else.</small>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label for="fname">First Name</label>
+                            <input type="text" id="fname" name="f_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lname">Last Name</label>
+                            <input type="text" id="lname" name="l_name" value="Doe" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control form-control-lg" required placeholder="Password*" required name="password"
-                               id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*?[~`!@#$%\^&*()\-_=+[\]{};:\x27.,\x22\\|/?><]).{8,}" title="Must contain:
-                       at least one number, one uppercase letter, one lowercase letter, one special character, and 8 or more characters" required>
-                        <input type="checkbox" onclick="showPassword()">Show Password
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
 
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label>Password (Required)</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm_password">Confirm Password (Required)</label>
+                            <input type="password" id="confirm_password" name="confirm_password" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="Address">Address</label>
-                        <textarea class="form-control form-control-lg" rows="3" placeholder="Enter Your Address" name="address"></textarea>
+                    <div class="form-group" >
+                        <label for="register"></label>
+                        <input type="submit" id="register" name="Register" value="REGISTER">
                     </div>
-                    <span style="margin-top: 10px">Already have an account <a class="linkControl" href="index">Login here</a></span> <br><br>
-                    <input type="submit" value="Register" class="btn btn-primary btn-block"><br>
-
                 </form>
             </div>
         </div>
-
     </main> <!-- Main Area -->
 </div>
 

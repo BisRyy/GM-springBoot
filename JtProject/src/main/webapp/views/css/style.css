@@ -1007,7 +1007,7 @@ main .account-page .profile ul li a span{
 main .account-page .account-detail{
 	width: 60%;
 }
-main .account-page .account-detail input[type="submit"]{
+main .account-page .account-detail input[type="submit"], main .account-detail input[type="submit"]{
 	background-color: var(--khaki);
 	color: var(--darkStaleGray);
 	text-transform: uppercase;
@@ -1020,7 +1020,7 @@ main .account-page .account-detail input[type="submit"]{
 	cursor: pointer;
 	width: 100%;
 }
-main .account-page .account-detail input[type="submit"]:hover{
+main .account-page .account-detail input[type="submit"]:hover, .account-detail input[type="submit"]:hover{
 	background-color: var(--darkStaleGray);
 	color: var(--khaki);
 }

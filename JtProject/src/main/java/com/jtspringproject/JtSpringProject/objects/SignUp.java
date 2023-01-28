@@ -1,6 +1,5 @@
 package com.jtspringproject.JtSpringProject.objects;
 
-import java.util.Random;
 import java.util.Scanner;
 
 public class SignUp {

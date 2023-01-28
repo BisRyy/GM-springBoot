@@ -3,15 +3,15 @@ package com.jtspringproject.JtSpringProject.controller;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
+import com.jtspringproject.JtSpringProject.objects.Buyer;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class UserController{
+	Buyer currentUser = new Buyer();
 
 	@GetMapping("/landing")
 	public String landing()
@@ -94,18 +94,28 @@ public class UserController{
 	}
 
 	@RequestMapping(value = "newuserregister", method = RequestMethod.POST)
-	public String newUseRegister(@RequestParam("username") String username,@RequestParam("password") String password,@RequestParam("email") String email)
+	public String newUseRegister(@RequestParam("username") String username,
+								 @RequestParam("f_name") String f_name,
+								 @RequestParam("l_name") String l_name,
+								 @RequestParam("password") String password,
+								 @RequestParam("email") String email)
 	{
 		try
 		{
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/springproject","bisry","password");
-			PreparedStatement pst = con.prepareStatement("insert into users(username,password,email) values(?,?,?);");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/grainmill","bisry","password");
+			PreparedStatement pst = con.prepareStatement("insert into users(username, f_name, l_name ,password,email) values(?,?,?,?,?);");
 			pst.setString(1, username);
-			pst.setString(2, password);
-			pst.setString(3, email);
-			
+			pst.setString(2, f_name);
+			pst.setString(3, l_name);
+			pst.setString(4, password);
+			pst.setString(5, email);
 
-			//pst.setString(4, address);
+			currentUser.setUsername(username);
+			currentUser.setFirstName(f_name);
+			currentUser.setLastName(l_name);
+			currentUser.setPassword(password);
+			currentUser.setEmail(email);
+
 			int i = pst.executeUpdate();
 			System.out.println("data base updated"+i);
 			

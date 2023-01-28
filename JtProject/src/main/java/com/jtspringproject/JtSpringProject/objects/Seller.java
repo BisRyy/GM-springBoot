@@ -6,13 +6,7 @@ import java.util.List;
 class Seller extends Person {
     private List<Grain> grains;
 
-    public Seller(String id, String name, String address, String email, String phoneNumber) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.grains = new ArrayList<>();
+    public Seller() {
     }
 
     public List<Grain> getGrainListings() {

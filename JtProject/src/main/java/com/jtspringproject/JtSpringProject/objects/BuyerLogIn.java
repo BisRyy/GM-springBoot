@@ -1,7 +1,5 @@
 package com.jtspringproject.JtSpringProject.objects;
 
-import java.util.Scanner;
-
 public class BuyerLogIn extends LogIn {
     Buyer buyer;
     public Buyer logIn(){
@@ -14,6 +12,6 @@ public class BuyerLogIn extends LogIn {
     }
 
     public Buyer getBuyer(){
-        return new Buyer("001", "Abebe", "AASTU 101 road", "Abe@abebe.com","+2519555555");
+        return new Buyer();
     }
 }
