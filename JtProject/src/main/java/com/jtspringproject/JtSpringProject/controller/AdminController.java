@@ -13,8 +13,6 @@ public class AdminController {
 
     @RequestMapping(value = {"/", "/home"})
     public String returnHome() {
-        adminlogcheck = 0;
-        usernameforclass = "";
         return "home";
     }
 

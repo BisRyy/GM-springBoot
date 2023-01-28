@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Title -->
-    <title>E-Commerce Online Shop</title>
+    <title>My Account - GM</title>
     <!-- Style Sheet -->
     <link rel="stylesheet" type="text/css" href="../views/css/style.css" />
     <!-- Javascript -->
@@ -18,11 +18,11 @@
     <div class="container">
         <div class="brand">
             <div class="logo">
-                <a href="index.html">
+                <a href="/home">
                     <img src="../views/img/icons/online_shopping.png">
                     <div class="logo-text">
                         <p class="big-logo">Grain Mill</p>
-                        <p class="small-logo">market&delivery</p>
+                        <p class="small-logo">market&delivery </p>
                     </div>
                 </a>
             </div> <!-- logo -->
@@ -31,8 +31,8 @@
                     <img src="../views/img/icons/account.png">
                     <div class="dropdown-menu">
                         <ul>
-                            <li><a href="account.html">My Account</a></li>
-                            <li><a href="orders.html">My Orders</a></li>
+                            <li><a href="/account">My Account</a></li>
+                            <li><a href="/orders">My Orders</a></li>
                         </ul>
                     </div>
                 </div>
@@ -74,14 +74,14 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td><img src="../views/img/product/img1.jpg"></td>
+                                <td><img src="../views/img/product/img1.jpg" alt=""></td>
                                 <td>product name</td>
                                 <td class="center">1200</td>
                                 <td class="center">2</td>
                                 <td class="center">2400</td>
                             </tr>
                             <tr>
-                                <td><img src="../views/img/product/img2.jpg"></td>
+                                <td><img src="../views/img/product/img2.jpg" alt=""></td>
                                 <td>product name</td>
                                 <td class="center">1500</td>
                                 <td class="center">2</td>
@@ -97,10 +97,10 @@
         <div class="menu-bar">
             <div class="menu">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="home">Home</a></li>
+                    <li><a href="/shop">Shop</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
                 </ul>
             </div>
             <div class="search-bar">
@@ -134,7 +134,7 @@
                 </div>
                 <ul>
                     <li><a href="account" class="active">Account <span>></span></a></li>
-                    <li><a href="order">My Orders <span>></span></a></li>
+                    <li><a href="myOrders">My Orders <span>></span></a></li>
                     <li><a href="change-password">Change Password <span>></span></a></li>
                     <li><a href="logout">Logout <span>></span></a></li>
                 </ul>

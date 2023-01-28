@@ -43,6 +43,11 @@ public class UserController{
 	{
 		return "updateProfile";
 	}
+	@GetMapping("/changePassword")
+	public String changePassword()
+	{
+		return "changePassword";
+	}
 	@GetMapping("/refund")
 	public String refund()
 	{
@@ -63,10 +68,10 @@ public class UserController{
 	{
 		return "buy";
 	}
-	@GetMapping("/order")
+	@GetMapping("/myOrders")
 	public String orders()
 	{
-		return "order";
+		return "myOrders";
 	}
 	@GetMapping("/product")
 	public String product()
@@ -87,6 +92,7 @@ public class UserController{
 	public String getproduct(Model model) {
 		return "uproduct";
 	}
+
 	@RequestMapping(value = "newuserregister", method = RequestMethod.POST)
 	public String newUseRegister(@RequestParam("username") String username,@RequestParam("password") String password,@RequestParam("email") String email)
 	{

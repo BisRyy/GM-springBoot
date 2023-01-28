@@ -17,7 +17,7 @@
   				
   				$('input[type="radio"]').change(function(){
   					
-  					if (this.value == 'easypaisa') {
+  					if (this.value === 'easypaisa') {
   						
   						$('#easypaisaText').css('display', 'block');
   					} 
@@ -36,7 +36,7 @@
 			<div class="brand">
 				<div class="logo">
 					<a href="index.html">
-						<img src="../views/img/icons/online_shopping.png">
+						<img src="../views/img/icons/online_shopping.png" alt="">
 						<div class="logo-text">
 							<p class="big-logo">Ecommerce</p>
 							<p class="small-logo">online shop</p>
@@ -45,7 +45,7 @@
 				</div> <!-- logo -->
 				<div class="shop-icon">
 					<div class="dropdown">
-						<img src="../views/img/icons/account.png">
+						<img src="../views/img/icons/account.png" alt="">
 						<div class="dropdown-menu">
 							<ul>
 								<li><a href="account.html">My Account</a></li>
@@ -54,7 +54,7 @@
 						</div>
 					</div>
 					<div class="dropdown">
-						<img src="../views/img/icons/heart.png">
+						<img src="../views/img/icons/heart.png" alt="">
 						<div class="dropdown-menu wishlist-item">
 							<table border="1">
 								<thead>
@@ -209,9 +209,10 @@
 						</div>
 						<h4>Additional Information (Optional)</h4>
 						<div class="form-group">
-							<label>Order Note</label>
-							<textarea style="resize:none" id="address" name="address" rows="3"></textarea>
-						</div>					
+							<label for="note">Order Note</label>
+							<textarea style="resize:none" id="note" name="address" rows="3"></textarea>
+						</div>
+					</form>
 				</div>
 				<div class="order-summary">
 					<div class="checkout-total">
