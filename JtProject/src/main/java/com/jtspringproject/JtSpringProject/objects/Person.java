@@ -2,7 +2,7 @@ package com.jtspringproject.JtSpringProject.objects;
 
 public abstract class Person {
 
-    public String id;
+    public int id;
     public String firstName;
     public String lastName;
     public String username;
@@ -18,11 +18,11 @@ public abstract class Person {
     public String state;
     public String country;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Buyer extends Person{
-    private List<Transaction> transactions;
+    public List<Transaction> transactions;
 
     public Buyer(){
         this.transactions = new ArrayList<>();
     }
 
-
+    public Buyer(int id){
+        this.id = id;
+    }
     public List<Transaction> getTransactions() {
         return this.transactions;
     }

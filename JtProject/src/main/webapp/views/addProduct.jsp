@@ -1,3 +1,4 @@
+<%@page import="java.sql.*"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,33 +13,7 @@
 </head>
 <body>
 
-<header>
-    <div class="container">
-        <div class="brand">
-            <div class="logo">
-                <a href="adminhome">
-                    <img src="../views/img/icons/online_shopping.png">
-                    <div class="logo-text">
-                        <p class="big-logo">Grain Mill</p>
-                        <p class="small-logo">Market&Delivery</p>
-                    </div>
-                </a>
-            </div> <!-- logo -->
-            <div class="shop-icon">
-                <div class="dropdown">
-                    <img src="../views/img/icons/account.png">
-                    <div class="dropdown-menu">
-                        <ul>
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Settings</a></li>
-                            <li><a href="#">Logout</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div> <!-- shop icons -->
-        </div> <!-- brand -->
-    </div> <!-- container -->
-</header> <!-- header -->
+<%@include file="common/header3.jspf"%>
 
 <main>
 
@@ -57,44 +32,85 @@
         <div class="content">
             <h3>Product</h3>
             <div class="content-data">
+                <%
+                    try {
+                        String url = "jdbc:mysql://localhost:3306/grainmill";
+                        Class.forName("com.mysql.cj.jdbc.Driver");
+                        Connection con = DriverManager.getConnection(url, "bisry", "password");
+                        Statement stmt = con.createStatement();
+                        ResultSet rs = stmt.executeQuery("select * from products order by id desc");
+                        ResultSet rs1;
+                %>
                 <div class="content-form">
-                    <form>
-                        <h4>Add Product</h4>
+                    <form action="sendData" method="post">
+                        <h4>Add a new Product</h4>
                         <div class="form-inline">
-                            <div class="form-group">
+                            <%
+                                if (rs.next()) {
+                            %>
+                            <div class="form-group" style="width: 20%;">
+
+                                <label for="id">Id</label>
+                                <input type="number" id="id" readonly="readonly" class="form-control border border-warning" name="id"  value="<%=rs.getInt(1) + 1%>">
+                            </div>
+                            <%
+                                }
+                            %>
+
+                            <div class="form-group" style="width: 75%;">
                                 <label>Product Name</label>
                                 <input type="text" name="pname">
                             </div>
-                            <div class="form-group">
+                        </div>
+                        <div class="form-inline" >
+                            <div class="form-group" style="width: 30%;">
                                 <label>Price</label>
-                                <input type="text" name="price">
+                                <input type="number" name="price">
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Short Description</label>
-                            <input type="text" name="sdesc">
-                        </div>
-                        <div class="form-group">
-                            <label>Long Description</label>
-                            <textarea style="resize:none" name="ldesc" rows="3"></textarea>
+                            <div class="form-group" style="width: 30%;">
+                                <label>Milling Cost</label>
+                                <input type="number" name="mprice">
+                            </div>
+                            <div class="form-group" style="width: 30%;">
+                                <label>Quantity (Kg)</label>
+                                <input type="number" name="quantity">
+                            </div>
                         </div>
                         <div class="form-inline">
                             <div class="form-group">
                                 <label>Category</label>
-                                <select name="category">
+                                <select name="categoryid">
                                     <option>---Select a Category---</option>
-                                    <option>Pakistan</option>
+                                    <%
+                                        rs = stmt.executeQuery("select * from categories");
+                                        while(rs.next())
+                                        {
+                                    %>
+                                    <option ><%= rs.getString(2) %></option>
+                                    <%
+                                        }
+                                    %>
+                                    <option>Other</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Images</label>
-                                <input type="file" name="image" multiple>
+                                <input type="file" name="productImage" multiple>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Short Description</label>
+                            <input type="text" name="sdesc" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Long Description (Optional)</label>
+                            <textarea style="resize:none" name="ldesc" rows="3"></textarea>
                         </div>
                         <div class="form-group">
                             <label></label>
                             <input type="submit" name="addProduct" value="Add Product">
                         </div>
+
                     </form>
                 </div>
                 <div class="content-detail">
@@ -102,29 +118,49 @@
                     <table>
                         <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Product</th>
                             <th>Price</th>
+                            <th>Mill Cost</th>
+                            <th>quantity</th>
                             <th>Category</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+<%--                            <th>Edit</th>--%>
+<%--                            <th>Delete</th>--%>
                         </tr>
                         </thead>
                         <tbody>
+                        <%
+                            rs = stmt.executeQuery("select * from products join categories c on c.category_id = products.category_id");
+
+                            while(rs.next())
+                            {
+                        %>
                         <tr>
-                            <td>Blue Jeans</td>
-                            <td>1500</td>
-                            <td>Pants</td>
-                            <td>Edit</td>
-                            <td>Delete</td>
+                            <th><%= rs.getInt(1) %></th>
+                            <th><%= rs.getString(2)%></th>
+                            <th><%= rs.getString(3)%></th>
+                            <th><%= rs.getString(4)%></th>
+                            <th><%= rs.getString(6)%></th>
+                            <th>
+                                <%=rs.getString(11)%>
+                            </th>
+<%--                            <th>Edit</th>--%>
+<%--                            <th>Delete</th>--%>
                         </tr>
+                        <%
+                            }
+                        %>
                         </tbody>
                     </table>
                 </div>
+                <%
+                    } catch (Exception e) {
+                        System.out.println("Exception: " + e);
+                    }
+                %>
             </div>
         </div>
     </div>
-
-
 </main> <!-- Main Area -->
 
 <footer>

@@ -4,6 +4,8 @@
 <%@ page import="java.sql.DriverManager" %>
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
@@ -40,133 +42,34 @@
 </head>
 <body>
 
-<header>
-    <div class="container">
-        <div class="brand">
-            <div class="logo">
-                <a href="/home">
-                    <img src="../views/img/icons/online_shopping.png">
-                    <div class="logo-text">
-                        <p class="big-logo">Grain Mill</p>
-                        <p class="small-logo">market&delivery </p>
-                    </div>
-                </a>
-            </div> <!-- logo -->
-            <div class="shop-icon">
-                <div class="dropdown">
-                    <img src="../views/img/icons/account.png">
-                    <div class="dropdown-menu">
-                        <ul>
-                            <li><a href="/account">My Account</a></li>
-                            <li><a href="/orders">My Orders</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <img src="../views/img/icons/heart.png">
-                    <div class="dropdown-menu wishlist-item">
-                        <table border="1">
-                            <thead>
-                            <tr>
-                                <th>Image</th>
-                                <th>Product Name</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><img src="../views/img/product/img1.jpg"></td>
-                                <td>product name</td>
-                            </tr>
-                            <tr>
-                                <td><img src="../views/img/product/img2.jpg"></td>
-                                <td>product name</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <img src="../views/img/icons/shopping_cart.png">
-                    <div class="dropdown-menu cart-item">
-                        <table border="1">
-                            <thead>
-                            <tr>
-                                <th>Image</th>
-                                <th>Product Name</th>
-                                <th class="center">Price</th>
-                                <th class="center">Qty.</th>
-                                <th class="center">Amount</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><img src="../views/img/product/img1.jpg" alt=""></td>
-                                <td>product name</td>
-                                <td class="center">1200</td>
-                                <td class="center">2</td>
-                                <td class="center">2400</td>
-                            </tr>
-                            <tr>
-                                <td><img src="../views/img/product/img2.jpg" alt=""></td>
-                                <td>product name</td>
-                                <td class="center">1500</td>
-                                <td class="center">2</td>
-                                <td class="center">3000</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div> <!-- shop icons -->
-        </div> <!-- brand -->
 
-        <div class="menu-bar">
-            <div class="menu">
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="/shop">Shop</a></li>
-                    <li><a href="/about">About</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                </ul>
-            </div>
-            <div class="search-bar">
-                <form>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="search" placeholder="Search">
-                        <img src="../views/img/icons/search.png">
-                    </div>
-                </form>
-            </div>
-        </div> <!-- menu -->
-    </div> <!-- container -->
-</header> <!-- header -->
-
+<%@include file="common/header.jspf"%>
 
 <div class="container">
     <main>
         <div class="slider">
             <div class="slide-1">
-                <img src="../views/img/slider/slide-1.jpg">
+                <img src="../images/gallery/1.jpg">
                 <div class="slider-text">
                     <h3>Sale 40% off</h3>
-                    <h2>Men's Watches</h2>
-                    <a href="#">Shop Now</a>
+                    <h2>Fresh Grains</h2>
+                    <a href="shop#grains">Shop Now</a>
                 </div>
             </div>
             <div class="slide-2">
-                <img src="../views/img/slider/slide-2.jpg">
+                <img src="../images/gallery/2.jpg">
                 <div class="slider-text">
                     <h3>Sale 20% off</h3>
-                    <h2>Women's Fashion</h2>
-                    <a href="#">Shop Now</a>
+                    <h2>Organic Beans</h2>
+                    <a href="shop">Shop Now</a>
                 </div>
             </div>
             <div class="slide-3">
-                <img src="../views/img/slider/slide-3.jpg">
+                <img src="../images/gallery/3.jpg">
                 <div class="slider-text">
                     <h3>Sale 50% off</h3>
-                    <h2>Women's Collection</h2>
-                    <a href="#">Shop Now</a>
+                    <h2>Variety Flour</h2>
+                    <a href="shop">Shop Now</a>
                 </div>
             </div>
         </div> <!-- slider -->
@@ -180,38 +83,31 @@
             <div class="product-content">
             <%
                 try {
-                    String url = "jdbc:mysql://localhost:3306/springproject";
+                    String url = "jdbc:mysql://localhost:3306/grainmill";
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     Connection con = DriverManager.getConnection(url, "bisry", "password");
                     Statement stmt = con.createStatement();
                     Statement stmt2 = con.createStatement();
-                    ResultSet rs = stmt.executeQuery("select * from products");
+                    ResultSet rs = stmt.executeQuery("select * from products join categories c on c.category_id = products.category_id");
             %>
             <%
                 for (int i=0; i < 4; i++) {
                     rs.next();
             %>
                 <div class="product">
-                    <a href="product">
-                        <img src="../views/img/product/img1.jpg">
+                    <a href="product?pid=<%= rs.getString(1) %>">
+                        <img src="../views/img/product/img<%= rs.getString(7) %>">
                     </a>
                     <div class="product-detail">
                         <h3>
-                            <%
-                                int categoryid = rs.getInt(4);
-                                ResultSet rs2 = stmt2.executeQuery("select * from categories where categoryid = "+categoryid+";");
-                                if(rs2.next())
-                                {
-                                    out.print(rs2.getString(2));
-                                }
-                            %>
+                            <%= rs.getString(11) %>
                         </h3>
                         <h2>
                             <%= rs.getString(2) %>
                         </h2>
-                        <a href="#">Add to Cart</a>
+                        <a href="cart/add?pid=<%= rs.getString(1) %>">Add to Cart</a>
                         <p>
-                            <%= rs.getInt(5) %> Birr.
+                            <%= rs.getInt(3) %> Birr.
                         </p>
                     </div>
                 </div>
@@ -228,139 +124,19 @@
 
         <div class="collection">
             <div class="men-collection">
-                <h2>Men's Collection</h2>
+                <h2>Grain Collection</h2>
             </div>
             <div class="women-collection">
-                <h2>Women's Collection</h2>
+                <h2>Flour Collection</h2>
             </div>
         </div> <!-- Collection Section -->
 
-        <div class="new-product-section">
-            <div class="product-section-heading">
-                <h2>Recommend Products <img src="../views/img/icons/good_quality.png"></h2>
-                <h3>OUR BEST PRODUCTS RECOMMENDED FOR YOU</h3>
-            </div>
-            <div class="product-content">
-                <%
-                    try {
-                        String url = "jdbc:mysql://localhost:3306/springproject";
-                        Class.forName("com.mysql.cj.jdbc.Driver");
-                        Connection con = DriverManager.getConnection(url, "bisry", "password");
-                        Statement stmt = con.createStatement();
-                        Statement stmt2 = con.createStatement();
-                        ResultSet rs = stmt.executeQuery("select * from products");
-                %>
-                <%
-                    for (int i=0; i < 4; i++) {
-                        rs.next();
-                %>
-                <div class="product">
-                    <a href="product">
-                        <img src="../views/img/product/img1.jpg">
-                    </a>
-                    <div class="product-detail">
-                        <h3>
-                            <%
-                                int categoryid = rs.getInt(4);
-                                ResultSet rs2 = stmt2.executeQuery("select * from categories where categoryid = "+categoryid+";");
-                                if(rs2.next())
-                                {
-                                    out.print(rs2.getString(2));
-                                }
-                            %>
-                        </h3>
-                        <h2>
-                            <%= rs.getString(2) %>
-                        </h2>
-                        <a href="#">Add to Cart</a>
-                        <p>
-                            <%= rs.getInt(5) %> Birr.
-                        </p>
-                    </div>
-                </div>
-                <%
-                    }
-                %>
-            </div>
-            <%
-                } catch (Exception ex) {
-                out.println("Exception Occurred:: " + ex.getMessage());
-                }
-                %>
-            </div>
-        </div> <!-- Recommend Product Section -->
+        <%@include file="common/recommended.jspf"%>
+
     </main> <!-- Main Area -->
 </div>
 
-<footer>
-    <div class="container">
-        <div class="footer-widget">
-            <div class="widget">
-                <div class="widget-heading">
-                    <h3>Important Link</h3>
-                </div>
-                <div class="widget-content">
-                    <ul>
-                        <li><a href="/about">About</a></li>
-                        <li><a href="/contact">Contact</a></li>
-                        <li><a href="/refund">Refund Policy</a></li>
-                        <li><a href="/terms">Terms & Conditions</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="widget">
-                <div class="widget-heading">
-                    <h3>Information</h3>
-                </div>
-                <div class="widget-content">
-                    <ul>
-                        <li><a href="/account">My Account</a></li>
-                        <li><a href="/orders">My Orders</a></li>
-                        <li><a href="/cart">Cart</a></li>
-                        <li><a href="/checkout">Checkout</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="widget">
-                <div class="widget-heading">
-                    <h3>Follow us</h3>
-                </div>
-                <div class="widget-content">
-                    <div class="follow">
-                        <ul>
-                            <li><a href="#"><img src="../views/img/icons/facebook.png"></a></li>
-                            <li><a href="#"><img src="../views/img/icons/twitter.png"></a></li>
-                            <li><a href="#"><img src="../views/img/icons/instagram.png"></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="widget-heading">
-                    <h3>Subscribe for Newsletter</h3>
-                </div>
-                <div class="widget-content">
-                    <div class="subscribe">
-                        <form>
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="subscribe" placeholder="Email">
-                                <img src="../views/img/icons/paper_plane.png">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- Footer Widget -->
-        <div class="footer-bar">
-            <div class="copyright-text">
-                <p>Copyright 2023 - All Rights Reserved</p>
-            </div>
-            <div class="payment-mode">
-                <img src="../views/img/icons/paper_money.png" alt="">
-                <img src="../views/img/icons/visa.png" alt="">
-                <img src="../views/img/icons/mastercard.png" alt="">
-            </div>
-        </div> <!-- Footer Bar -->
-    </div>
-</footer> <!-- Footer Area -->
+<%@include file="common/footer.jspf"%>
 
 </body>
 </html>

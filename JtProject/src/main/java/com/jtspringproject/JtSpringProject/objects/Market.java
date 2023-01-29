@@ -7,8 +7,8 @@ import java.util.Map;
 
 class Market {
     private List<Grain> grains;
-    private Map<String, Seller> sellers;
-    private Map<String, Buyer> buyers;
+    private Map<Integer, Seller> sellers;
+    private Map<Integer, Buyer> buyers;
     private List<Transaction> transactions;
     private List<Payment> payments;
     private List<Delivery> deliveries;
@@ -30,10 +30,10 @@ class Market {
         this.grains.remove(grain);
     }
 
-    public List<Grain> searchGrainListings(String grainType, int quantity) {
+    public List<Grain> searchGrainListings(int grainType, int quantity) {
         List<Grain> results = new ArrayList<>();
         for (Grain listing : grains) {
-            if (listing.getGrainType().equals(grainType) && listing.getQuantity() >= quantity) {
+            if (listing.getCategoryId() == grainType && listing.getQuantity() >= quantity) {
                 results.add(listing);
             }
         }

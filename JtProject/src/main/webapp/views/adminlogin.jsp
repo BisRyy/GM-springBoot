@@ -9,11 +9,9 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <title>Document</title>
+    <title>Admin Login - GM</title>
 </head>
 <body class="bg-dark">
-
-
 
 <div class="container my-5" style="width: 1800px;" ><br>
     
@@ -33,8 +31,8 @@
                 <input type="submit" value="Login" class="btn btn-primary btn-block">
                 <br><h3 style="color:red;">${message }</h3>
                 <br>
+            </form>
         </div>
-
 </div>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

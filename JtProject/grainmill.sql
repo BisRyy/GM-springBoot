@@ -41,6 +41,7 @@ CREATE TABLE `products` (
   `id` int(11) PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `price` int(11) NOT NULL,
+  `mprice` int(11) DEFAULT 0,
   `category_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `image` text DEFAULT NULL,
@@ -52,10 +53,10 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`name`, `price`, `image`, `category_id`, `quantity`, `info`) VALUES
-('Key Teff', 5200, '1.jpg', 0, 200, 'Magna teff'),
-('Nech Teff', 6000, '1.jpg', 0, 200, 'Ke Merkato'),
-('Magna Teff', 5500, '1.jpg', 0, 200, 'Ke Megenagna');
+INSERT INTO `products` (`name`, `price`, `mprice`, `image`, `category_id`, `quantity`, `info`) VALUES
+('Key Teff', 5200, 12, '1.jpg', 0, 200, 'Magna teff'),
+('Nech Teff', 6000, 15, '1.jpg', 0, 200, 'Ke Merkato'),
+('Magna Teff', 5500, 10, '1.jpg', 0, 200, 'Ke Megenagna');
 
 
 # ALTER TABLE `products`
@@ -128,6 +129,25 @@ ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`) ON DELETE CASCADE;
 COMMIT;
 
+
+CREATE TABLE `cart` (
+        `id` int(11) PRIMARY KEY ,
+        `userId` int(11) ,
+        `productId` int(11),
+        `quantity` int(11) NOT NULL
+);
+
+ALTER TABLE `cart`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+# ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
+# ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+INSERT INTO `cart` (`userId`, `productId`, `quantity`) VALUES
+    ( 1, 1, 10),
+( 2, 3, 10),
+( 3, 1, 20),
+( 1, 2, 30),
+( 2, 1, 40);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

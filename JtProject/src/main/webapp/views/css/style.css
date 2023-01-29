@@ -679,7 +679,7 @@ main .load-more a:hover{
 }
 /* Content Section === Cart Page */
 main .cart-page{
-	max-height: 580px;
+	/*max-height: 580px;*/
 	display: flex;
 	justify-content: space-between;
 	padding: 10px;
@@ -696,6 +696,7 @@ main h2{
 }
 main .cart-page .cart-items table{
 	width: 100%;
+
 }
 main .cart-page .cart-items table .qty{
 	text-align: center;
@@ -716,14 +717,14 @@ main .cart-page .cart-items table td{
 	border-bottom: 1px solid rgba(236, 240, 241,0.3);
 	padding: 8px 0;
 }
-main .cart-page .cart-items table td a{
+main .cart-page .cart-items table td a, .cart-item tr td:last-child a{
 	color: var(--white);
 	background-color: red;
 	padding: 1px 7px;
 	text-decoration: none;
 	border-radius: 2px;
 }
-main .cart-page .cart-items table td a:hover{
+main .cart-page .cart-items table td a:hover, .cart-item tr td a:hover{
 	background-color: var(--darkStaleGray);
 }
 main .cart-page .cart-items .pagination ul{
@@ -750,7 +751,7 @@ input.cartNumber::-webkit-inner-spin-button {
   margin: 0;
 }
 input.cartNumber{
-	width: 50px;
+	width: 60px;
 	height: 25px;
 	position: absolute;
 	padding: 0 5px;
@@ -774,7 +775,7 @@ div.next{
 	width: 30px;
 	height: 25px;
 	position: absolute;
-	right: -10px;
+	right: -20px;
 	top: 20%;
 	background-color: var(--darkStaleGray);
 	color: var(--khaki);

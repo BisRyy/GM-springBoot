@@ -40,32 +40,7 @@
 </head>
 <body>
 
-<header>
-    <div class="container">
-        <div class="brand">
-            <div class="logo">
-                <a href="/home">
-                    <img src="../views/img/icons/online_shopping.png">
-                    <div class="logo-text">
-                        <p class="big-logo" style="line-height: 1;">Grain Mill</p>
-                        <p class="small-logo" style="line-height: 1;">market  & delivery</p>
-                    </div>
-                </a>
-            </div> <!-- logo -->
-
-            <div class="menu">
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="/shop">Shop</a></li>
-                    <li><a href="/about">About</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                </ul>
-            </div> <!-- menu -->
-        </div> <!-- brand -->
-
-    </div> <!-- container -->
-</header> <!-- header -->
-
+<%@include file="common/header2.jspf"%>
 
 <div class="container" style="align-content: center;">
     <main style="width: 80%;">
@@ -86,28 +61,28 @@
                     <div class="form-inline">
                         <div class="form-group">
                             <label for="fname">First Name</label>
-                            <input type="text" id="fname" name="f_name" required>
+                            <input type="text" id="fname" name="f_name" placeholder="E.g. Bisrat" required>
                         </div>
                         <div class="form-group">
                             <label for="lname">Last Name</label>
-                            <input type="text" id="lname" name="l_name" value="Doe" required>
+                            <input type="text" id="lname" name="l_name" placeholder="E.g. Kebere" required>
                         </div>
                     </div>
                     <div class="form-inline">
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="email" placeholder="E.g dev@bisrat.tech" required>
                         </div>
                     </div>
 
                     <div class="form-inline">
                         <div class="form-group">
                             <label>Password (Required)</label>
-                            <input type="password" id="password" name="password" required>
+                            <input type="password" id="password" name="password" placeholder="+8 characters lower, UPPER, Speci@l and Number " required>
                         </div>
                         <div class="form-group">
                             <label for="confirm_password">Confirm Password (Required)</label>
-                            <input type="password" id="confirm_password" name="confirm_password" required>
+                            <input type="password" id="confirm_password" name="confirm_password" placeholder="Repeat your Password" required>
                         </div>
                     </div>
                     <div class="form-group" >
@@ -115,80 +90,15 @@
                         <input type="submit" id="register" name="Register" value="REGISTER">
                     </div>
                 </form>
+                <div style="padding-top: 20px;">
+                    Already Have an Account? <a href="login"> Login</a>
+                </div>
             </div>
         </div>
     </main> <!-- Main Area -->
 </div>
 
-<footer>
-    <div class="container">
-        <div class="footer-widget">
-            <div class="widget">
-                <div class="widget-heading">
-                    <h3>Important Link</h3>
-                </div>
-                <div class="widget-content">
-                    <ul>
-                        <li><a href="/about">About</a></li>
-                        <li><a href="/contact">Contact</a></li>
-                        <li><a href="/refund">Refund Policy</a></li>
-                        <li><a href="/terms">Terms & Conditions</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="widget">
-                <div class="widget-heading">
-                    <h3>Information</h3>
-                </div>
-                <div class="widget-content">
-                    <ul>
-                        <li><a href="/account">My Account</a></li>
-                        <li><a href="/orders">My Orders</a></li>
-                        <li><a href="/cart">Cart</a></li>
-                        <li><a href="/checkout">Checkout</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="widget">
-                <div class="widget-heading">
-                    <h3>Follow us</h3>
-                </div>
-                <div class="widget-content">
-                    <div class="follow">
-                        <ul>
-                            <li><a href="#"><img src="../views/img/icons/facebook.png"></a></li>
-                            <li><a href="#"><img src="../views/img/icons/twitter.png"></a></li>
-                            <li><a href="#"><img src="../views/img/icons/instagram.png"></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="widget-heading">
-                    <h3>Subscribe for Newsletter</h3>
-                </div>
-                <div class="widget-content">
-                    <div class="subscribe">
-                        <form>
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="subscribe" placeholder="Email">
-                                <img src="../views/img/icons/paper_plane.png">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- Footer Widget -->
-        <div class="footer-bar">
-            <div class="copyright-text">
-                <p>Copyright 2023 - All Rights Reserved</p>
-            </div>
-            <div class="payment-mode">
-                <img src="../views/img/icons/paper_money.png" alt="">
-                <img src="../views/img/icons/visa.png" alt="">
-                <img src="../views/img/icons/mastercard.png" alt="">
-            </div>
-        </div> <!-- Footer Bar -->
-    </div>
-</footer> <!-- Footer Area -->
+<%@include file="common/footer.jspf"%>
 
 <script>
     function showPassword() {

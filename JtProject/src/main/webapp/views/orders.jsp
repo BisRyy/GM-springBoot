@@ -12,33 +12,7 @@
 </head>
 <body>
 
-<header>
-    <div class="container">
-        <div class="brand">
-            <div class="logo">
-                <a href="index">
-                    <img src="../views/img/icons/online_shopping.png">
-                    <div class="logo-text">
-                        <p class="big-logo">Grain Mill</p>
-                        <p class="small-logo">Market&Delivery</p>
-                    </div>
-                </a>
-            </div> <!-- logo -->
-            <div class="shop-icon">
-                <div class="dropdown">
-                    <img src="../views/img/icons/account.png">
-                    <div class="dropdown-menu">
-                        <ul>
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Settings</a></li>
-                            <li><a href="#">Logout</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div> <!-- shop icons -->
-        </div> <!-- brand -->
-    </div> <!-- container -->
-</header> <!-- header -->
+<%@include file="common/header3.jspf"%>
 
 <main>
 
