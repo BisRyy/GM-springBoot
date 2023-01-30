@@ -145,47 +145,64 @@
                     <form class="checkout-form" action="updateuser" method="post">
                         <div class="form-inline">
                             <div class="form-group">
+                                <label for="username">User Name (Required)</label>
+                                <input type="text" id="username" name="username" value="${user.getUsername()}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="age">Age (Required)</label>
+                                <input type="number" id="age" name="age" min="18" required>
+                            </div>
+                        </div>
+                        <div class="form-inline">
+                            <div class="form-group">
                                 <label>First Name</label>
-                                <input type="text" id="fname" name="fname" value="${username}">
+                                <input type="text" id="fname" name="fname" value="${user.getFirstName()}">
                             </div>
                             <div class="form-group">
                                 <label>Last Name</label>
-                                <input type="text" id="lname" name="lname" value="Doe">
+                                <input type="text" id="lname" name="lname" value="${user.getLastName()}">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Company Name (Optional)</label>
-                            <input type="text" id="cname" name="cname">
+                            <label>Email Address</label>
+                            <input type="email" id="cname" name="email" value="${user.getEmail()}">
                         </div>
                         <div class="form-inline">
                             <div class="form-group">
                                 <label for="country">Country</label>
                                 <select id="country" name="country">
-                                    <option selected>---Select a Country---</option>
-                                    <option value="pakistan">Pakistan</option>
+                                    <option >---Select a Country---</option>
+                                    <option selected value="pakistan">Ethiopia</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="country">State</label>
+                                <select id="state" name="state">
+                                    <option >---Select a State---</option>
+                                    <option selected value="Addis">Addis Ababa</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="city">City</label>
                                 <select id="city" name="city">
-                                    <option selected>---Select a City---</option>
-                                    <option value="karachi">Karachi</option>
+                                    <option >---Select a City---</option>
+                                    <option selected value="Addis">Addis Ababa</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <label>Mobile</label>
+                                <input type="text" id="phone" name="phone" minlength="11" maxlength="11" placeholder="251-XXXXXXX" value="${user.getPhone()}">
+                            </div>
+                            <div class="form-group">
+                                <label>Images</label>
+                                <input type="file" name="image" multiple>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="address">Address</label>
                             <textarea style="resize:none" id="address" name="address" rows="3">${address} </textarea>
-                        </div>
-                        <div class="form-inline">
-                            <div class="form-group">
-                                <label for="useremail">Email</label>
-                                <input type="email" id="useremail" name="email" value="${email}">
-                            </div>
-                            <div class="form-group">
-                                <label>Mobile</label>
-                                <input type="text" id="mobile" name="mobile" minlength="11" maxlength="11" value="555-XXXXXXX">
-                            </div>
                         </div>
                         <div class="form-group">
                             <label></label>

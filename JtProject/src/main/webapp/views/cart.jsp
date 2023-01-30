@@ -112,7 +112,7 @@
                         <li>Number of Products x 15</li>
                         <li>Number of items x 20</li>
                         <hr>
-                        <li>Cart Total <span style="float: right;">Rs.1200</span></li>
+                        <li>Cart Total <span style="float: right;">1200 Birr</span></li>
                         <li><a href="checkout">Go to Checkout</a></li>
                     </ul>
                 </div>

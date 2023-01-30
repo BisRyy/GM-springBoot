@@ -59,21 +59,21 @@
 
                             <div class="form-group" style="width: 75%;">
                                 <label>Product Name</label>
-                                <input type="text" name="pname">
+                                <input type="text" name="pname" required>
                             </div>
                         </div>
                         <div class="form-inline" >
                             <div class="form-group" style="width: 30%;">
                                 <label>Price</label>
-                                <input type="number" name="price">
+                                <input type="number" name="price" required>
                             </div>
                             <div class="form-group" style="width: 30%;">
                                 <label>Milling Cost</label>
-                                <input type="number" name="mprice">
+                                <input type="number" name="mprice" required>
                             </div>
                             <div class="form-group" style="width: 30%;">
                                 <label>Quantity (Kg)</label>
-                                <input type="number" name="quantity">
+                                <input type="number" name="quantity" min="10" required>
                             </div>
                         </div>
                         <div class="form-inline">
@@ -86,7 +86,7 @@
                                         while(rs.next())
                                         {
                                     %>
-                                    <option ><%= rs.getString(2) %></option>
+                                    <option selected><%= rs.getString(2) %></option>
                                     <%
                                         }
                                     %>
@@ -130,7 +130,7 @@
                         </thead>
                         <tbody>
                         <%
-                            rs = stmt.executeQuery("select * from products join categories c on c.category_id = products.category_id");
+                            rs = stmt.executeQuery("select * from products join categories c on c.category_id = products.category_id order by id");
 
                             while(rs.next())
                             {

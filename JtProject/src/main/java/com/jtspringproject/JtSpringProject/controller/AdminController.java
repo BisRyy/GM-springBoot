@@ -68,7 +68,7 @@ public class AdminController {
     public String getAddProduct(Model model) {
         return "addProduct";
     }
-    @RequestMapping(value = "/addProduct/sendData", method = RequestMethod.POST)
+    @RequestMapping(value = "sendData", method = RequestMethod.POST)
     public String addproducttodb(@RequestParam("pname") String name,
                                  @RequestParam("categoryid") String catid,
                                  @RequestParam("price") int price,
@@ -99,7 +99,7 @@ public class AdminController {
         } catch (Exception e) {
             System.out.println("Exception:" + e);
         }
-        return "redirect:/admin/products";
+        return "redirect:/addProduct";
     }
 
     @GetMapping(value = {"/idx"})
@@ -132,10 +132,11 @@ public class AdminController {
                 currentUser.setPassword(rst.getString(5));
                 currentUser.setImage(rst.getString(8));
                 currentUser.setEmail(rst.getString(9));
-                currentUser.setAddress(rst.getString(10));
-                currentUser.setCity(rst.getString(11));
-                currentUser.setState(rst.getString(12));
-                currentUser.setCountry(rst.getString(13));
+                currentUser.setPhone(rst.getString(10));
+                currentUser.setAddress(rst.getString(11));
+                currentUser.setCity(rst.getString(12));
+                currentUser.setState(rst.getString(13));
+                currentUser.setCountry(rst.getString(14));
 
                 return "redirect:/index";
             } else {
@@ -170,7 +171,6 @@ public class AdminController {
 
     @GetMapping("/cart/add")
     public String addToCart(@RequestParam("pid") int pid, Model model) {
-//        INSERT INTO `cart` (`id`, `userId`, `productId`, `quantity`) VALUES     (5, 3, 3, 100);
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -190,34 +190,15 @@ public class AdminController {
     }
 
 
+    //    =========== A D M I N =================
 
 
-
-
-
-    //    ============================
-    @RequestMapping(value = {"/logout"})
-    public String returnIndex() {
-        adminlogcheck = 0;
-        usernameforclass = "";
-        currentUser = new Buyer();
-        return "userLogin";
-    }
-
-    @GetMapping("/template")
-    public String getTemplate(Model model) {
-        return "template";
-    }
-
-    @GetMapping("/admin")
+    @GetMapping({"/admin","/adminhome"})
     public String adminlogin(Model model) {
-        return "adminlogin";
-    }
-
-    @GetMapping("/adminhome")
-    public String adminHome(Model model) {
-        if (adminlogcheck != 0) return "adminHome";
-        else return "redirect:/admin";
+        if(adminlogcheck == 1)
+            return "adminHome";
+        else
+            return "redirect:/loginvalidate";
     }
 
     @GetMapping("/loginvalidate")
@@ -237,13 +218,69 @@ public class AdminController {
         }
     }
 
-    @GetMapping("/admin/categories")
-    public String getcategory() {
-        return "categories";
-    }
     @GetMapping("/addCategory")
     public String addCategory() {
         return "addCategory";
+    }
+
+    @RequestMapping(value = "addCat", method = RequestMethod.POST)
+    public String addCat(@RequestParam("cat_name") String catName){
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/grainmill", "bisry", "password");
+            Statement stmt = con.createStatement();
+
+            PreparedStatement pst = con.prepareStatement("insert into categories(name) values(?);");
+            pst.setString(1, catName);
+            int i = pst.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println("Exception:" + e);
+        }
+
+        return "redirect:/addCategory";
+    }
+
+    @RequestMapping(value = "addStk", method = RequestMethod.POST)
+    public String addStk(@RequestParam("pqty") String quantity, @RequestParam("pname") int pid){
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/grainmill", "bisry", "password");
+            Statement stmt = con.createStatement();
+
+            PreparedStatement pst = con.prepareStatement("update products set quantity = ? where id="+ pid);
+            pst.setString(1, quantity);
+            int i = pst.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println("Exception:" + e);
+        }
+
+        return "redirect:/addCategory";
+    }
+
+
+    //    ============================
+    @RequestMapping(value = {"/logout"})
+    public String returnIndex() {
+        adminlogcheck = 0;
+        usernameforclass = "";
+        currentUser = new Buyer();
+        return "userLogin";
+    }
+
+
+
+    @GetMapping("/template")
+    public String getTemplate(Model model) {
+        return "template";
+    }
+
+    @GetMapping("/admin/categories")
+    public String getcategory() {
+        return "categories";
     }
     @GetMapping("/addProduct")
     public String addProduct() {
@@ -412,44 +449,55 @@ public class AdminController {
 
     @GetMapping("profileDisplay")
     public String profileDisplay(Model model) {
-        String displayusername, displaypassword, displayemail, displayaddress;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/springproject", "bisry", "password");
-            Statement stmt = con.createStatement();
-            ResultSet rst = stmt.executeQuery("select * from users where username = '" + usernameforclass + "';");
-
-            if (rst.next()) {
-                int userid = rst.getInt(1);
-                displayusername = rst.getString(2);
-                displayemail = rst.getString(3);
-                displaypassword = rst.getString(4);
-                displayaddress = rst.getString(5);
-                model.addAttribute("userid", userid);
-                model.addAttribute("username", displayusername);
-                model.addAttribute("email", displayemail);
-                model.addAttribute("password", displaypassword);
-                model.addAttribute("address", displayaddress);
-            }
-        } catch (Exception e) {
-            System.out.println("Exception:" + e);
-        }
+//        String displayusername, displaypassword, displayemail, displayaddress;
+//        try {
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/springproject", "bisry", "password");
+//            Statement stmt = con.createStatement();
+//            ResultSet rst = stmt.executeQuery("select * from users where username = '" + usernameforclass + "';");
+//
+//            if (rst.next()) {
+//                int userid = rst.getInt(1);
+//                displayusername = rst.getString(2);
+//                displayemail = rst.getString(3);
+//                displaypassword = rst.getString(4);
+//                displayaddress = rst.getString(5);
+//                model.addAttribute("userid", userid);
+//                model.addAttribute("username", displayusername);
+//                model.addAttribute("email", displayemail);
+//                model.addAttribute("password", displaypassword);
+//                model.addAttribute("address", displayaddress);
+//            }
+//        } catch (Exception e) {
+//            System.out.println("Exception:" + e);
+//        }
+        model.addAttribute("user", currentUser);
         System.out.println("Hello");
         return "updateProfile";
     }
 
     @RequestMapping(value = "updateuser", method = RequestMethod.POST)
-    public String updateUserProfile(@RequestParam("userid") int userid, @RequestParam("username") String username, @RequestParam("email") String email, @RequestParam("password") String password, @RequestParam("address") String address) {
+    public String updateUserProfile(
+            @RequestParam("username") String username,
+            @RequestParam("fname") String f_name,
+            @RequestParam("lname") String l_name,
+            @RequestParam("email") String email,
+            @RequestParam("image") String image,
+            @RequestParam("phone") String phone,
+            @RequestParam("address") String address) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/springproject", "bisry", "password");
 
-            PreparedStatement pst = con.prepareStatement("update users set username= ?,email = ?,password= ?, address= ? where uid = ?;");
+            PreparedStatement pst = con.prepareStatement("update users set username= ?,email = ?,f_name= ?,l_name=?, image=?, address= ? , phone=? where uid = ?;");
             pst.setString(1, username);
             pst.setString(2, email);
-            pst.setString(3, password);
-            pst.setString(4, address);
-            pst.setInt(5, userid);
+            pst.setString(3, f_name);
+            pst.setString(4, l_name);
+            pst.setString(5, image);
+            pst.setString(6, address);
+            pst.setString(7, phone);
+            pst.setInt(8, currentUser.getId());
             int i = pst.executeUpdate();
             usernameforclass = username;
         } catch (Exception e) {

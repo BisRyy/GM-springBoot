@@ -1,3 +1,4 @@
+<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,15 +34,29 @@
         <h3>Stock</h3>
         <div class="content-data">
             <div class="content-form">
-                <form>
+                <form action="addStk">
                     <h4>Add Stock</h4>
                     <div class="form-inline">
                         <div class="form-group">
+
                             <label>Product Name</label>
                             <select name="pname">
                                 <option>---Select a Product---</option>
-                                <option value="men">Men</option>
-                                <option value="women">Women</option>
+                                <%
+                                    try {
+                                        String url = "jdbc:mysql://localhost:3306/grainmill";
+                                        Class.forName("com.mysql.cj.jdbc.Driver");
+                                        Connection con = DriverManager.getConnection(url, "bisry", "password");
+                                        Statement stmt = con.createStatement();
+                                        ResultSet rs = stmt.executeQuery("select * from products");
+                                        while (rs.next()) {
+                                %>
+                                    <option value="<%= rs.getInt(1)%>"><%= rs.getString(2)%></option>
+                                <%}
+                                    } catch (Exception e) {
+                                    System.out.println("Exception: " + e);
+                                }
+                                %>
                             </select>
                         </div>
                         <div class="form-group">
@@ -60,7 +75,8 @@
                 <table>
                     <thead>
                     <tr>
-                        <th>Product</th>
+                        <th>ID</th>
+                        <th>Product Name</th>
                         <th>Category</th>
                         <th>Stock in</th>
                         <th>Stock Out</th>
@@ -68,13 +84,30 @@
                     </tr>
                     </thead>
                     <tbody>
+
+                    <%
+                        try {
+                            String url = "jdbc:mysql://localhost:3306/grainmill";
+                            Class.forName("com.mysql.cj.jdbc.Driver");
+                            Connection con = DriverManager.getConnection(url, "bisry", "password");
+                            Statement stmt = con.createStatement();
+                            ResultSet rs = stmt.executeQuery("select * from products join categories c on c.category_id = products.category_id");
+                            while (rs.next()) {
+                    %>
+
                     <tr>
-                        <td>Blue Jeans</td>
-                        <td>Jeans</td>
-                        <td>10</td>
-                        <td>3</td>
-                        <td>7</td>
+                        <td><%= rs.getInt(1)%></td>
+                        <td><%= rs.getString(2)%></td>
+                        <td><%= rs.getString(11)%></td>
+                        <td><%= rs.getString(6)%></td>
+                        <td><%= rs.getInt(6) - rs.getInt(6) %></td>
+                        <td><%= rs.getString(6)%></td>
                     </tr>
+                    <%}
+                    } catch (Exception e) {
+                        System.out.println("Exception: " + e);
+                    }
+                    %>
                     </tbody>
                 </table>
             </div>
