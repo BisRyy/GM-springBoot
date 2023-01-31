@@ -32,45 +32,17 @@
 <%@include file="common/header.jspf"%>
 
 <div class="container" >
-    <main  style="background: #ffffffda">
+    <main >
 
         <div class="breadcrumb">
             <ul>
                 <li><a href="/index">Home</a></li>
                 <li> / </li>
-                <li>Shop</li>
+                <li>Search Result</li>
             </ul>
         </div> <!-- End of Breadcrumb-->
 
         <div class="new-product-section shop">
-            <div class="sidebar">
-                <h3>CATEGORIES</h3>
-                <div class="sidebar-widget" >
-                    <ul>
-                        <%
-                            try {
-                                String url = "jdbc:mysql://localhost:3306/grainmill";
-                                Class.forName("com.mysql.cj.jdbc.Driver");
-                                Connection con = DriverManager.getConnection(url, "bisry", "password");
-                                Statement stmt = con.createStatement();
-                                ResultSet rs = stmt.executeQuery("select * from categories");
-
-                        %>
-                        <%
-                            rs.next();
-                            while (rs.next()) {
-                        %>
-                        <br><li><a href="" style="color: saddlebrown"><%= rs.getString(2).toUpperCase()%></a></li>
-                        <%
-                                }
-                            } catch (Exception ex) {
-                                out.println("Exception Occurred:: " + ex.getMessage());
-                            }
-                        %>
-                    </ul>
-                </div>
-
-            </div>
             <div class="product-content">
 
                 <%
@@ -80,7 +52,7 @@
                         Connection con = DriverManager.getConnection(url, "bisry", "password");
                         Statement stmt = con.createStatement();
                         Statement stmt2 = con.createStatement();
-                        ResultSet rs = stmt.executeQuery("select * from products join categories c on c.category_id = products.category_id");
+                        ResultSet rs = stmt.executeQuery("select * from products join categories c on c.category_id = products.category_id where products.name like '%"+ request.getAttribute("value")+"%'");
 
                 %>
                 <%

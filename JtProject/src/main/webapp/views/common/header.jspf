@@ -22,6 +22,7 @@
                             <ul>
                                 <li><a href="account">My Account</a></li>
                                 <li><a href="myOrders">My Orders</a></li>
+                                <li><a href="logout">Logout</a></li>
                             </ul>
                         </div>
                     </div>
@@ -31,18 +32,18 @@
                             <table border="1">
                                 <thead>
                                 <tr>
-                                    <th>Image</th>
-                                    <th>Product Name</th>
+                                    <th colspan="2">Top Categories</th>
+<%--                                    <th>Product Name</th>--%>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
                                     <td><img src="../views/img/product/img1.jpg"></td>
-                                    <td>product name</td>
+                                    <td>Grains</td>
                                 </tr>
                                 <tr>
-                                    <td><img src="../views/img/product/img2.jpg"></td>
-                                    <td>product name</td>
+                                    <td><img src="../views/img/product/img15.jpg"></td>
+                                    <td>Flours</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -106,10 +107,10 @@
                     </ul>
                 </div>
                 <div class="search-bar">
-                    <form>
+                    <form action="search" method="get">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="search" placeholder="Search">
-                            <img src="../views/img/icons/search.png">
+                            <input type="text" class="form-control" name="val" placeholder="Search" >
+                            <button type="submit" class="btn btn-primary"><img src="../views/img/icons/search.png"></button>
                         </div>
                     </form>
                 </div>

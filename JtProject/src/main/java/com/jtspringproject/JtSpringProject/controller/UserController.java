@@ -71,6 +71,15 @@ public class UserController {
 		}
 	}
 
+	@GetMapping("/search")
+	public String search(Model model, @RequestParam("val") String value) {
+		if (AdminController.usernameforclass.equalsIgnoreCase("")) return "userLogin";
+		else {
+			model.addAttribute("value", value);
+			return "search";
+		}
+	}
+
 	@GetMapping("/about")
 	public String getAbout() {
 		return "about";
