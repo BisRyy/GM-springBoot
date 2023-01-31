@@ -18,13 +18,22 @@ public class AdminController {
     public static Buyer currentUser;
     static Product currentProduct = new Product();
 
-    @RequestMapping(value = {"/"})
+    @RequestMapping(value = {"/","/error"})
     public String returnHome() {
         return "home";
     }
 
-    @GetMapping(value = { "/home","/index"})
+    @GetMapping(value = { "/home","/index","/error"})
     public String index(Model model) {
+        if (usernameforclass.equalsIgnoreCase("")) return "userLogin";
+        else {
+            model.addAttribute("username", currentUser.getUsername());
+            return "home";
+        }
+    }
+
+    @GetMapping(value = {"/error"})
+    public String error(Model model) {
         if (usernameforclass.equalsIgnoreCase("")) return "userLogin";
         else {
             model.addAttribute("username", currentUser.getUsername());
