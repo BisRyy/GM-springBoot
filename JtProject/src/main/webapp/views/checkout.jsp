@@ -4,7 +4,6 @@
 <head>
     <!-- Meta Tags -->
     <meta charset="UTF-8">
-    <meta name="author" content="Bisrat Kebere">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Title -->
     <title>E-Commerce Online Shop</title>
@@ -31,116 +30,17 @@
 </head>
 <body>
 
-<header>
-    <div class="container">
-        <div class="brand">
-            <div class="logo">
-                <a href="index">
-                    <img src="../views/img/icons/online_shopping.png" alt="">
-                    <div class="logo-text">
-                        <p class="big-logo">Grain Mill</p>
-                        <p class="small-logo">Market&Delivery</p>
-                    </div>
-                </a>
-            </div> <!-- logo -->
-            <div class="shop-icon">
-                <div class="dropdown">
-                    <img src="../views/img/icons/account.png" alt="">
-                    <div class="dropdown-menu">
-                        <ul>
-                            <li><a href="account">My Account</a></li>
-                            <li><a href="orders.jsp">My Orders</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <img src="../views/img/icons/heart.png" alt="">
-                    <div class="dropdown-menu wishlist-item">
-                        <table border="1">
-                            <thead>
-                            <tr>
-                                <th>Image</th>
-                                <th>Product Name</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><img src="../views/img/product/img1.jpg"></td>
-                                <td>product name</td>
-                            </tr>
-                            <tr>
-                                <td><img src="../views/img/product/img2.jpg"></td>
-                                <td>product name</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <img src="../views/img/icons/shopping_cart.png">
-                    <div class="dropdown-menu cart-item">
-                        <table border="1">
-                            <thead>
-                            <tr>
-                                <th>Image</th>
-                                <th>Product Name</th>
-                                <th class="center">Price</th>
-                                <th class="center">Qty.</th>
-                                <th class="center">Amount</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><img src="../views/img/product/img1.jpg"></td>
-                                <td>product name</td>
-                                <td class="center">1200</td>
-                                <td class="center">2</td>
-                                <td class="center">2400</td>
-                            </tr>
-                            <tr>
-                                <td><img src="../views/img/product/img2.jpg"></td>
-                                <td>product name</td>
-                                <td class="center">1500</td>
-                                <td class="center">2</td>
-                                <td class="center">3000</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div> <!-- shop icons -->
-        </div> <!-- brand -->
-
-        <div class="menu-bar">
-            <div class="menu">
-                <ul>
-                    <li><a href="index">Home</a></li>
-                    <li><a href="shop">Shop</a></li>
-                    <li><a href="about">About</a></li>
-                    <li><a href="contact">Contact</a></li>
-                </ul>
-            </div>
-            <div class="search-bar">
-                <form>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="search" placeholder="Search">
-                        <img src="../views/img/icons/search.png">
-                    </div>
-                </form>
-            </div>
-        </div> <!-- menu -->
-    </div> <!-- container -->
-</header> <!-- header -->
+<%@include file="common/header.jspf"%>
 
 <div class="container">
     <main>
         <div class="breadcrumb">
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index">Home</a></li>
                 <li> / </li>
-                <li><a href="shop.html">Shop</a></li>
+                <li><a href="shop">Shop</a></li>
                 <li> / </li>
-                <li><a href="cart.html">Cart</a></li>
+                <li><a href="cart">Cart</a></li>
                 <li> / </li>
                 <li>Checkout</li>
             </ul>
@@ -154,7 +54,7 @@
                     <div class="form-inline">
                         <div class="form-group">
                             <label>First Name</label>
-                            <input type="text" id="fname" name="fname">
+                            <input type="text" id="fname" name="fname" required>
                         </div>
                         <div class="form-group">
                             <label>Last Name</label>
@@ -170,30 +70,30 @@
                             <label>Country</label>
                             <select id="country" name="country">
                                 <option>---Select a Country---</option>
-                                <option>Pakistan</option>
+                                <option>Ethiopia</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>City</label>
                             <select id="cityy" name="cityy">
                                 <option>---Select a City---</option>
-                                <option>Karachi</option>
+                                <option>Addis Ababa</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Address</label>
-                        <textarea style="resize:none" id="address" name="address" rows="3"></textarea>
+                        <textarea style="resize:none" id="address" name="address" rows="3" minlength="10" required></textarea>
                     </div>
                     <h4>Login Detail</h4>
                     <div class="form-inline">
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" id="email" name="email" autocomplete="off">
+                            <input type="email" id="email" name="email" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label>Password</label>
-                            <input type="password" id="password" name="password" autocomplete="off">
+                            <input type="password" id="password" name="password" autocomplete="off" required>
                         </div>
                     </div>
                     <h4>Contact Detail</h4>
@@ -213,23 +113,44 @@
                         <textarea style="resize:none" id="note" name="address" rows="3"></textarea>
                     </div>
                 </form>
-            </div>
+            </div> <!-- End of Billing Detail-->
+            <%
+                try {
+                    String url = "jdbc:mysql://localhost:3306/grainmill";
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    Connection con = DriverManager.getConnection(url, "bisry", "password");
+                    Statement stmt = con.createStatement();
+                    Statement stmt2 = con.createStatement();
+                    ResultSet rs = stmt.executeQuery(" select * from products join cart on products.id = cart.productId join categories c on c.category_id = products.category_id where cart.userId =" + request.getAttribute("userid"));
+                    int items = 0;
+                    float total = 0;
+                    float mtotal = 0;
+            %>
             <div class="order-summary">
+                <form action="check" method="post">
                 <div class="checkout-total">
                     <h3>Order Summary</h3>
                     <ul>
-                        <li>Cart Amount: <span>1200</span></li>
-                        <li>Delivery Charges: <span>100</span></li>
-                        <li>Less: Discount @ 10%: <span>-13</span></li>
+                        <li>Number of Products  <span style="float: right;">x ${items}</span></li>
+                        <li>Products Cost: <span style="float: right;">${ total }0 Birr</span></li>
+                        <li>Milling Cost: <span style="float: right;">${mtotal}0 Birr</span></li>
                         <hr>
-                        <li>Total Amount: <span>1287</span></li>
+                        <li>Cart Total <span style="float: right;">${ total + mtotal }0 Birr</span></li>
                         <hr>
-                        <li><input type="radio" name="payment"> Cash on Delivery</li>
-                        <li><input type="radio" id="easypaisa" name="payment" value="easypaisa"> Easypaisa Account</li>
+                        <li>Delivery Charges: <span> + ${ 0.05 * (total + mtotal) }0 Birr</span></li>
+                        <li>Discount @ 10%: <span> - ${ 0.1 * (total + mtotal) }0 Birr</span></li>
+                        <hr>
+                        <li>Total Amount: <span> ${ 0.85 * (total + mtotal) }0 Birr</span></li>
+                        <hr>
+                        <input type="number" name="items" value="${items}" hidden>
+                        <input type="number" name="price" value=${ 0.85 * (total + mtotal) } hidden>
+
+                        <li><input type="radio" name="pmode" value="1" checked> Cash on Delivery</li>
+                        <li><input type="radio" id="easypaisa" name="pmode" value="2"> Telebirr Account</li>
                         <li>
-                            <textarea id="easypaisaText" rows="5" disabled="disable">Please deposit the payment in our easypaisa account# 030X-XXXXXXX after confirm payment kindly send us payment slip and order transaction id on above number.</textarea>
+                            <textarea id="telebirr" rows="5" disabled="disable">Please deposit the payment in our telebirr account# 251-XXXXXXX after confirm payment kindly send us payment slip and order transaction id on above number.</textarea>
                         </li>
-                        <li><input type="radio" name="payment"> Bank Transferred</li>
+                        <li><input type="radio" name="pmode" value="3"> Bank Transferred</li>
                         <hr>
                         <li><input type="submit" name="order" value="Place Order"></li>
                     </ul>
@@ -237,78 +158,15 @@
                 </form> <!-- End of Checkout Form -->
             </div>
         </div>
+        <%
+            } catch (Exception ex) {
+                out.println("Exception Occurred:: " + ex.getMessage());
+            }
+        %>
     </main> <!-- Main Area -->
 </div>
 
-<footer>
-    <div class="container">
-        <div class="footer-widget">
-            <div class="widget">
-                <div class="widget-heading">
-                    <h3>Important Link</h3>
-                </div>
-                <div class="widget-content">
-                    <ul>
-                        <li><a href="about">About</a></li>
-                        <li><a href="contact">Contact</a></li>
-                        <li><a href="refund">Refund Policy</a></li>
-                        <li><a href="terms">Terms & Conditions</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="widget">
-                <div class="widget-heading">
-                    <h3>Information</h3>
-                </div>
-                <div class="widget-content">
-                    <ul>
-                        <li><a href="account">My Account</a></li>
-                        <li><a href="orders.jsp">My Orders</a></li>
-                        <li><a href="cart">Cart</a></li>
-                        <li><a href="checkout">Checkout</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="widget">
-                <div class="widget-heading">
-                    <h3>Follow us</h3>
-                </div>
-                <div class="widget-content">
-                    <div class="follow">
-                        <ul>
-                            <li><a href="#"><img src="../views/img/icons/facebook.png" alt=""></a></li>
-                            <li><a href="#"><img src="../views/img/icons/twitter.png" alt=""></a></li>
-                            <li><a href="#"><img src="../views/img/icons/instagram.png" alt=""></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="widget-heading">
-                    <h3>Subscribe for Newsletter</h3>
-                </div>
-                <div class="widget-content">
-                    <div class="subscribe">
-                        <form>
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="subscribe" placeholder="Email">
-                                <img src="../views/img/icons/paper_plane.png" alt="">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- Footer Widget -->
-        <div class="footer-bar">
-            <div class="copyright-text">
-                <p>Copyright 2023 - All Rights Reserved</p>
-            </div>
-            <div class="payment-mode">
-                <img src="../views/img/icons/paper_money.png" alt="">
-                <img src="../views/img/icons/visa.png" alt="">
-                <img src="../views/img/icons/mastercard.png" alt="">
-            </div>
-        </div> <!-- Footer Bar -->
-    </div>
-</footer> <!-- Footer Area -->
+<%@include file="common/footer.jspf"%>
 
 </body>
 

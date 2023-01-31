@@ -1,4 +1,8 @@
-
+<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="com.jtspringproject.JtSpringProject.controller.AdminController" %>
     <header>
         <div class="container">
             <div class="brand">
@@ -13,11 +17,11 @@
                 </div> <!-- logo -->
                 <div class="shop-icon">
                     <div class="dropdown">
-                        <img src="../views/img/icons/account.png">
+                        <a href="account"><img src="../views/img/icons/account.png"></a>
                         <div class="dropdown-menu">
                             <ul>
                                 <li><a href="account">My Account</a></li>
-                                <li><a href="orders">My Orders</a></li>
+                                <li><a href="myOrders">My Orders</a></li>
                             </ul>
                         </div>
                     </div>
@@ -65,14 +69,14 @@
                                         Connection con = DriverManager.getConnection(url, "bisry", "password");
                                         Statement stmt = con.createStatement();
                                         Statement stmt2 = con.createStatement();
-                                        ResultSet rs = stmt.executeQuery(" select * from cart join products on products.id = cart.productId join categories c on c.category_id = products.category_id");
+                                        ResultSet rs = stmt.executeQuery(" select * from cart join products on products.id = cart.productId join categories c on c.category_id = products.category_id where cart.userId =" + AdminController.currentUser.getId());
 
                                 %>
                                 <%
                                     while (rs.next()){
                                 %>
                                 <tr>
-                                    <td><a href="product?pid=<%= rs.getInt(3)%>"><img src="../views/img/product/img<%= rs.getString(11) %>" alt=""></a> </td>
+                                    <td><a href="product?pid=<%= rs.getInt(3)%>"><img src="../views/img/product/img<%= rs.getString(3) %>.jpg" alt=""></a> </td>
                                     <td><%=rs.getString(6)%></td>
                                     <td class="center"><%= rs.getInt(7)%></td>
                                     <td class="center"><%= rs.getInt(4)%></td>

@@ -32,7 +32,7 @@
 <%@include file="common/header.jspf"%>
 
 <div class="container" >
-    <main >
+    <main  style="background: #ffffffda">
 
         <div class="breadcrumb">
             <ul>
@@ -44,8 +44,8 @@
 
         <div class="new-product-section shop">
             <div class="sidebar">
-                <div class="sidebar-widget">
-                    <h3>Category</h3>
+                <h3>CATEGORIES</h3>
+                <div class="sidebar-widget" >
                     <ul>
                         <%
                             try {
@@ -57,9 +57,10 @@
 
                         %>
                         <%
+                            rs.next();
                             while (rs.next()) {
                         %>
-                        <li><a href=""><%= rs.getString(2)%></a></li>
+                        <br><li><a href=""><%= rs.getString(2).toUpperCase()%></a></li>
                         <%
                                 }
                             } catch (Exception ex) {
@@ -68,14 +69,7 @@
                         %>
                     </ul>
                 </div>
-                <div class="sidebar-widget">
-                    <h3>Range Filter</h3>
-                    <p>
-                        <label for="amount"></label>
-                        <input type="text" id="amount" readonly style="border:0; color:#F0E68C;  margin-bottom: 5px;">
-                    </p>
-                    <div id="slider-range"></div>
-                </div>
+
             </div>
             <div class="product-content">
 
@@ -95,7 +89,7 @@
 
                 <div class="product">
                     <a href="product?pid=<%= rs.getString(1) %>">
-                        <img src="../views/img/product/img<%= rs.getString(7) %>">
+                        <img src="../views/img/product/img<%= rs.getString(1) %>.jpg">
                     </a>
                     <div class="product-detail">
                         <h3>
@@ -104,7 +98,7 @@
                         <h2>
                             <%= rs.getString(2) %>
                         </h2>
-                        <a href="#">Add to Cart</a>
+                        <a href="cart/add?pid=<%= rs.getString(1) %>&qty=20">Add to Cart</a>
                         <p>
                             <%= rs.getInt(3) %> Birr.
                         </p>

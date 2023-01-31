@@ -326,7 +326,7 @@ main .collection{
 main .collection .men-collection{
 	width: 49%;
 	height: 200px;
-	background: gray url(../img/other/men-collection.jpg) no-repeat;
+	background: gray url(../../images/gallery/3.jpg) no-repeat;
 	background-size: cover;
 	background-blend-mode: multiply;
 	text-align: right;
@@ -336,7 +336,7 @@ main .collection .men-collection{
 main .collection .women-collection{
 	width: 49%;
 	height: 200px;
-	background: gray url(../img/other/women-collection.jpg) no-repeat;
+	background: gray url(../../images/gallery/1.jpg) no-repeat;
 	background-size: cover;
 	background-blend-mode: multiply;
 	text-align: left;
@@ -626,6 +626,7 @@ main .new-product-section.shop .sidebar .sidebar-widget h3{
 	font-weight: bold;
 	letter-spacing: 1px;
 	color: var(--darkStaleGray);
+	opacity: 100;
 	margin-bottom: 15px;
 	padding-bottom: 5px;
 	border-bottom: 1px solid var(--darkStaleGray);

@@ -12,10 +12,10 @@
 
                 var prev = $(this).closest('.qty').find("input").val();
 
-                if (prev == 1) {
-                    $(this).closest('.qty').find("input").val('1');
+                if (prev <= 10) {
+                    $(this).closest('.qty').find("input").val('10');
                 }else{
-                    var prevVal = prev - 1;
+                    var prevVal = prev - 10;
                     $(this).closest('.qty').find("input").val(prevVal);
                 }
             });
@@ -23,10 +23,10 @@
 
                 var next = $(this).closest('.qty').find("input").val();
 
-                if (next == 1000) {
+                if (next >= 1000) {
                     $(this).closest('.qty').find("input").val('10');
                 }else{
-                    var nextVal = ++next;
+                    var nextVal = parseInt(next) + 10;
                     $(this).closest('.qty').find("input").val(nextVal);
                 }
             });
@@ -36,7 +36,18 @@
 <body>
 
 <%@include file="common/header.jspf"%>
-
+<%
+    try {
+        String url = "jdbc:mysql://localhost:3306/grainmill";
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con = DriverManager.getConnection(url, "bisry", "password");
+        Statement stmt = con.createStatement();
+        Statement stmt2 = con.createStatement();
+        ResultSet rs = stmt.executeQuery(" select * from products join cart on products.id = cart.productId join categories c on c.category_id = products.category_id where cart.userId =" + request.getAttribute("userid"));
+        int items = 0;
+        float total = 0;
+        float mtotal = 0;
+%>
 <div class="container">
     <main>
         <div class="breadcrumb">
@@ -54,17 +65,12 @@
             <div class="cart-items">
                 <table>
                     <tbody>
-                    <%
-                        try {
-                            String url = "jdbc:mysql://localhost:3306/grainmill";
-                            Class.forName("com.mysql.cj.jdbc.Driver");
-                            Connection con = DriverManager.getConnection(url, "bisry", "password");
-                            Statement stmt = con.createStatement();
-                            Statement stmt2 = con.createStatement();
-                            ResultSet rs = stmt.executeQuery(" select * from products join cart on products.id = cart.productId join categories c on c.category_id = products.category_id;");
-                    %>
+
                     <%
                         while (rs.next()){
+                            items++;
+                            total += rs.getInt(3) * rs.getInt(13);
+                            mtotal += rs.getInt(4) * rs.getInt(13);
                     %>
                     <tr>
                         <td style="width: 20%;"><img src="../views/img/product/img<%= rs.getInt(1) %>.jpg"></td>
@@ -73,23 +79,20 @@
                             <p><%= rs.getString(8)%></p>
                             <br>
                             <h3>Price: <%= rs.getInt(3)%> Birr</h3>
+                            <span style="float: right; position: relative; right: 30%; bottom: 18px;">Milling Cost: <%= rs.getInt(4)%> Birr</span>
                             <br>
                             <a href="cart/remove?cid=<%= rs.getInt(10) %>">x</a> Remove
                         </td>
                         <td class="qty" style="width: 15%;">
                             <div class="prev">-</div>
                             <div class="next">+</div>
-                            <input type="number" name="cartNumber" class="cartNumber" value="<%= rs.getInt(13)%>" min="0">
+                            <input type="number" name="cartNumber" class="cartNumber" value="<%= rs.getInt(13)%>" min="0" step="10">
                             <br><br>
-                            <h3><%= rs.getInt(3) * rs.getInt(13)%> Birr</h3>
+                            <h3><%= rs.getInt(3) * rs.getInt(13)%>0 Birr</h3>
                         </td>
                     </tr>
                     <%}%>
-                    <%
-                        } catch (Exception ex) {
-                            out.println("Exception Occurred:: " + ex.getMessage());
-                        }
-                    %>
+
                     </tbody>
                     <thead>
                     <tr>
@@ -109,18 +112,25 @@
                 <div class="checkout-total">
                     <h3>Cart Summary</h3>
                     <ul>
-                        <li>Number of Products x 15</li>
-                        <li>Number of items x 20</li>
-                        <hr>
-                        <li>Cart Total <span style="float: right;">1200 Birr</span></li>
-                        <li><a href="checkout">Go to Checkout</a></li>
+                        <li>Number of Products  <span style="float: right;">x <%= items %></span></li>
+                        <br>
+                        <li>Products Cost: <span style="float: right;"><%= total %>0 Birr</span></li>
+                        <br>
+                        <li>Milling Cost: <span style="float: right;"><%= mtotal %>0 Birr</span></li>
+                        <br>
+                        <li>Cart Total <span style="float: right;"><%= total + mtotal %>0 Birr</span></li>
+                        <li><a href="checkout?items=<%= items %>&total=<%= total %>&mtotal=<%= mtotal %>">Go to Checkout</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </main> <!-- Main Area -->
 </div>
-
+<%
+    } catch (Exception ex) {
+    out.println("Exception Occurred:: " + ex.getMessage());
+    }
+%>
 <%@include file="common/footer.jspf"%>
 
 </body>

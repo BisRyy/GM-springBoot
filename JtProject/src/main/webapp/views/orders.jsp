@@ -1,3 +1,4 @@
+<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,18 +45,46 @@
                         <th>Delete</th>
                     </tr>
                     </thead>
+                    <%
+                        try {
+                            String url = "jdbc:mysql://localhost:3306/grainmill";
+                            Class.forName("com.mysql.cj.jdbc.Driver");
+                            Connection con = DriverManager.getConnection(url, "bisry", "password");
+                            Statement stmt = con.createStatement();
+                            ResultSet rs = stmt.executeQuery("select id, date , price, status, pmode, username from `order` join users on order.userId = users.user_id ");
+                    %>
                     <tbody>
+                    <% while (rs.next()) {%>
                     <tr>
-                        <td>11-05-2020</td>
-                        <td>15895452</td>
-                        <td>Kamran</td>
-                        <td>1500</td>
-                        <td>Cash On Delivery</td>
-                        <td>Pending</td>
-                        <td>View</td>
-                        <td>Delete</td>
+                        <td><%= rs.getString(2)%></td>
+                        <td>61245231<%= rs.getInt(1)%></td>
+                        <td><%= rs.getString(6)%></td>
+                        <td><%= rs.getInt(3)%>.00 Birr</td>
+
+                        <% if(rs.getInt(5) == 1){%>
+                        <td>Cash</td>
+                        <%}else if(rs.getInt(5)== 2){%>
+                        <td>Telebirr</td>
+                        <%}else if(rs.getInt(5)== 3){%>
+                        <td>Bank</td>
+                        <%}%>
+
+                        <% if(rs.getInt(4) == 0){%>
+                        <td>pending</td>
+                        <%}else{%>
+                        <td>delivered</td>
+                        <%}%>
+
+                        <td><a href="#">View</a></td>
+                        <td><a href="#">Delete</a></td>
                     </tr>
+                    <%}%>
                     </tbody>
+                    <%
+                        } catch (Exception e) {
+                            System.out.println("Exception: " + e);
+                        }
+                    %>
                 </table>
             </div>
         </div>

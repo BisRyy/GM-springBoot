@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import static com.jtspringproject.JtSpringProject.controller.AdminController.currentUser;
+
 @Controller
 public class UserController {
 //	Buyer currentUser = new Buyer();
@@ -28,25 +30,26 @@ public class UserController {
 			pst.setString(4, password);
 			pst.setString(5, email);
 
-			AdminController.currentUser.setUsername(username);
-			AdminController.currentUser.setFirstName(f_name);
-			AdminController.currentUser.setLastName(l_name);
-			AdminController.currentUser.setPassword(password);
-			AdminController.currentUser.setEmail(email);
+			currentUser = new Buyer();
+			currentUser.setUsername(username);
+			currentUser.setFirstName(f_name);
+			currentUser.setLastName(l_name);
+			currentUser.setPassword(password);
+			currentUser.setEmail(email);
 
 			int i = pst.executeUpdate();
 			System.out.println("data base updated" + i);
 
 		} catch (Exception e) {
 			String str1 = e.toString();
-			String check = "Access denied for user 'root'@'localhost' (using password: NO)";
+			String check = "Access denied for user 'bisry'@'localhost' (using password: NO)";
 			if (str1.contains(check)) {
 				return "redirect:/";
 			}
 			System.out.println(str1);
 			System.out.println("Exception:" + e);
 		}
-		return "redirect:/";
+		return "redirect:/index";
 	}
 
 
@@ -82,15 +85,17 @@ public class UserController {
 	public String account(Model model) {
 		if (AdminController.usernameforclass.equalsIgnoreCase("")) return "userLogin";
 		else {
-			model.addAttribute("user", AdminController.currentUser);
+			model.addAttribute("user", currentUser);
 			return "updateProfile";
 		}
 	}
 
 	@GetMapping("/changepassword")
-	public String changePassword() {
+	public String changePassword(Model model) {
 		if (AdminController.usernameforclass.equalsIgnoreCase("")) return "userLogin";
 		else {
+
+			model.addAttribute("user", currentUser);
 			return "changePassword";
 		}
 	}
@@ -106,9 +111,10 @@ public class UserController {
 	}
 
 	@GetMapping("/cart")
-	public String cart() {
+	public String cart(Model model) {
 		if (AdminController.usernameforclass.equalsIgnoreCase("")) return "userLogin";
 		else {
+			model.addAttribute("userid", currentUser.getId());
 			return "cart";
 		}
 	}
@@ -119,9 +125,10 @@ public class UserController {
 	}
 
 	@GetMapping("/myOrders")
-	public String orders() {
+	public String orders(Model model) {
 		if (AdminController.usernameforclass.equalsIgnoreCase("")) return "userLogin";
 		else {
+			model.addAttribute("user", currentUser);
 			return "myOrders";
 		}
 	}
@@ -132,13 +139,52 @@ public class UserController {
 	}
 
 	@GetMapping("/checkout")
-	public String getCheckout() {
+	public String getCheckout(Model model,
+							  @RequestParam("items") String item,
+							  @RequestParam("total") String total,
+							  @RequestParam("mtotal") String mtotal
+
+		) {
 		if (AdminController.usernameforclass.equalsIgnoreCase("")) return "userLogin";
 		else {
+			model.addAttribute("items", item);
+			model.addAttribute("total", total);
+			model.addAttribute("mtotal", mtotal);
+
 			return "checkout";
 		}
 	}
 
+
+	@RequestMapping(value = "check", method = RequestMethod.POST)
+	public String checkOut(
+			@RequestParam("items") int items,
+			@RequestParam("price") float price,
+			@RequestParam("pmode") int pmode
+
+	){
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/grainmill", "bisry", "password");
+			PreparedStatement pst = con.prepareStatement("INSERT INTO `order` (`userId`, `items`, `price`, `pmode`,`status`) VALUES (?, ?, ?,?,?)");
+			PreparedStatement pst1 = con.prepareStatement("DELETE FROM `cart` where userId=?");
+			pst1.setInt(1, currentUser.getId());
+
+			pst.setInt(1, currentUser.getId());
+			pst.setInt(2, items);
+			pst.setInt(3, (int) price);
+			pst.setInt(4, pmode);
+			pst.setInt(5, 0);
+			int i = pst.executeUpdate();
+			int j = pst1.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println("Exception:" + e);
+		}
+
+		return "redirect:/myOrders";
+	}
 	@GetMapping("/user/products")
 	public String getproduct(Model model) {
 		return "uproduct";

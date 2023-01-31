@@ -77,20 +77,20 @@
         <div class="single-product">
             <div class="images-section">
                 <div class="larg-img">
-                    <img src="../views/img/product/img${product.getImage()}">
+                    <img src="../views/img/product/img${product.getId()}.jpg">
                 </div>
                 <div class="small-img">
-                    <a class="fancybox" rel="group" href="../views/img/product/img2.jpg">
-                        <img src="../views/img/product/img2.jpg">
+                    <a class="fancybox" rel="group" href="../views/img/product/img${product.getId()}.jpg">
+                        <img src="../views/img/product/img${product.getId()}.jpg">
                     </a>
-                    <a class="fancybox" rel="group" href="../views/img/product/img3.jpg">
-                        <img src="../views/img/product/img3.jpg">
+                    <a class="fancybox" rel="group" href="../views/img/product/${product.getId()}.jpg">
+                        <img src="../views/img/product/img${product.getId()}.jpg">
                     </a>
-                    <a class="fancybox" rel="group" href="../views/img/product/img4.jpg">
-                        <img src="../views/img/product/img4.jpg">
+                    <a class="fancybox" rel="group" href="../views/img/product/img${product.getId()}.jpg">
+                        <img src="../views/img/product/img${product.getId()}.jpg">
                     </a>
-                    <a class="fancybox" rel="group" href="../views/img/product/img5.jpg">
-                        <img src="../views/img/product/img5.jpg">
+                    <a class="fancybox" rel="group" href="../views/img/product/${product.getId()}.jpg">
+                        <img src="../views/img/product/img${product.getId()}.jpg">
                     </a>
                 </div>
             </div> <!-- End of Images Section-->
@@ -110,7 +110,7 @@
                 <div class="product-cart">
                     <form id="cart-form" action="cart/add" method="get">
                         <div class="form-group">
-                            <input type="number" class="cart-number" name="cartNumber" value="1" min="1" max="10">
+                            <input type="number" class="cart-number" name="qty" value="10" min="10" step="10">
                             <input hidden="" type="number" class="cart-number" name="pid" value="${product.getId()}" min="1" max="10">
                             <input type="submit" name="addToCart" value="Add To Cart">
                         </div>

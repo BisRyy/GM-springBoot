@@ -128,14 +128,14 @@
         <div class="account-page">
             <div class="profile">
                 <div class="profile-img">
-                    <img src="../views/img/product/img5.jpg">
-                    <h2>John Doe</h2>
-                    <p>john_doe@mail.com</p>
+                    <img src="../views/img/product/unnamed.jpg">
+                    <h2>${user.getUsername()}</h2>
+                    <p>${user.getEmail()}</p>
                 </div>
                 <ul>
                     <li><a href="account" class="active">Account <span>></span></a></li>
                     <li><a href="myOrders">My Orders <span>></span></a></li>
-                    <li><a href="change-password">Change Password <span>></span></a></li>
+                    <li><a href="changepassword">Change Password <span>></span></a></li>
                     <li><a href="logout">Logout <span>></span></a></li>
                 </ul>
             </div>
@@ -150,7 +150,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="age">Age (Required)</label>
-                                <input type="number" id="age" name="age" min="18" required>
+                                <input type="number" id="age" name="age" min="18" value="18" required>
                             </div>
                         </div>
                         <div class="form-inline">
@@ -193,7 +193,7 @@
                         <div class="form-inline">
                             <div class="form-group">
                                 <label>Mobile</label>
-                                <input type="text" id="phone" name="phone" minlength="11" maxlength="11" placeholder="251-XXXXXXX" value="${user.getPhone()}">
+                                <input type="text" id="phone" name="phone" minlength="9" maxlength="12" placeholder="251-XXXXXXX" value="${user.getPhone()}">
                             </div>
                             <div class="form-group">
                                 <label>Images</label>

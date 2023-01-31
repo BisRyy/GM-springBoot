@@ -34,14 +34,14 @@
         <h3>Stock</h3>
         <div class="content-data">
             <div class="content-form">
-                <form action="addStk">
+                <form action="addStk" method="post">
                     <h4>Add Stock</h4>
                     <div class="form-inline">
                         <div class="form-group">
 
                             <label>Product Name</label>
                             <select name="pname">
-                                <option>---Select a Product---</option>
+                                <option value="0">---Select a Product---</option>
                                 <%
                                     try {
                                         String url = "jdbc:mysql://localhost:3306/grainmill";
@@ -51,7 +51,7 @@
                                         ResultSet rs = stmt.executeQuery("select * from products");
                                         while (rs.next()) {
                                 %>
-                                    <option value="<%= rs.getInt(1)%>"><%= rs.getString(2)%></option>
+                                    <option selected value="<%= rs.getInt(1)%>"><%= rs.getString(2)%></option>
                                 <%}
                                     } catch (Exception e) {
                                     System.out.println("Exception: " + e);
@@ -61,7 +61,7 @@
                         </div>
                         <div class="form-group">
                             <label>Quantity</label>
-                            <input type="text" name="pqty">
+                            <input type="text" name="pqty" required>
                         </div>
                     </div>
                     <div class="form-group">

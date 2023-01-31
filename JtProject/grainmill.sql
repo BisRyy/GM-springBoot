@@ -149,6 +149,18 @@ INSERT INTO `cart` (`userId`, `productId`, `quantity`) VALUES
 ( 1, 2, 30),
 ( 2, 1, 40);
 
+create table order (
+    `id` int(11) primary key,
+    `userId` int(11),
+    `items` int(11),
+     `price` int(11),
+      `pmode` int(11),
+       `status` int(11),
+       `date` datetime default current_timestamp
+                     );
+ALTER TABLE `order`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

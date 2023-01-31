@@ -38,7 +38,7 @@
                         <h4>Add Category</h4>
                             <div class="form-group">
                                 <label>Category Name</label>
-                                <input type="text" name="cat_name">
+                                <input type="text" name="cat_name" required>
                             </div>
                         <div class="form-group">
                             <label></label>
@@ -73,7 +73,6 @@
                         <tr>
                             <td><%= rs.getInt(1)%></td>
                             <td><%= rs.getString(2)%></td>
-                            <td>Edit</td>
                             <td>Delete</td>
                         </tr>
 

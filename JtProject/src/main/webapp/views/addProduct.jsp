@@ -95,7 +95,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Images</label>
-                                <input type="file" name="productImage" multiple>
+                                <input type="file" name="productImage" accept="image/png, image/jpeg, image/jpg" >
                             </div>
                         </div>
                         <div class="form-group">

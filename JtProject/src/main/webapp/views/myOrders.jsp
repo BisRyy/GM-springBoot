@@ -15,132 +15,41 @@
 </head>
 <body>
 
-<header>
-    <div class="container">
-        <div class="brand">
-            <div class="logo">
-                <a href="index.html">
-                    <img src="../views/img/icons/online_shopping.png">
-                    <div class="logo-text">
-                        <p class="big-logo">Ecommerce</p>
-                        <p class="small-logo">online shop</p>
-                    </div>
-                </a>
-            </div> <!-- logo -->
-            <div class="shop-icon">
-                <div class="dropdown">
-                    <img src="../views/img/icons/account.png">
-                    <div class="dropdown-menu">
-                        <ul>
-                            <li><a href="account.html">My Account</a></li>
-                            <li><a href="orders.html">My Orders</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <img src="../views/img/icons/heart.png">
-                    <div class="dropdown-menu wishlist-item">
-                        <table border="1">
-                            <thead>
-                            <tr>
-                                <th>Image</th>
-                                <th>Product Name</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><img src="../views/img/product/img1.jpg"></td>
-                                <td>product name</td>
-                            </tr>
-                            <tr>
-                                <td><img src="../views/img/product/img2.jpg"></td>
-                                <td>product name</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <img src="../views/img/icons/shopping_cart.png">
-                    <div class="dropdown-menu cart-item">
-                        <table border="1">
-                            <thead>
-                            <tr>
-                                <th>Image</th>
-                                <th>Product Name</th>
-                                <th class="center">Price</th>
-                                <th class="center">Qty.</th>
-                                <th class="center">Amount</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><img src="../views/img/product/img1.jpg"></td>
-                                <td>product name</td>
-                                <td class="center">1200</td>
-                                <td class="center">2</td>
-                                <td class="center">2400</td>
-                            </tr>
-                            <tr>
-                                <td><img src="../views/img/product/img2.jpg"></td>
-                                <td>product name</td>
-                                <td class="center">1500</td>
-                                <td class="center">2</td>
-                                <td class="center">3000</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div> <!-- shop icons -->
-        </div> <!-- brand -->
-
-        <div class="menu-bar">
-            <div class="menu">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div class="search-bar">
-                <form>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="search" placeholder="Search">
-                        <img src="../views/img/icons/search.png">
-                    </div>
-                </form>
-            </div>
-        </div> <!-- menu -->
-    </div> <!-- container -->
-</header> <!-- header -->
+<%@include file="common/header.jspf"%>
 
 <div class="container">
     <main>
         <div class="breadcrumb">
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index">Home</a></li>
                 <li> / </li>
-                <li><a href="account.html">Account</a></li>
+                <li><a href="account">Account</a></li>
                 <li> / </li>
                 <li>Orders</li>
             </ul>
         </div> <!-- End of Breadcrumb-->
 
+<%
+    try {
+        String url = "jdbc:mysql://localhost:3306/grainmill";
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con = DriverManager.getConnection(url, "bisry", "password");
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("select id, date , price, status, pmode from `order` join users on order.userId = users.user_id where users.user_id = " + AdminController.currentUser.getId());
 
+%>
         <div class="account-page">
             <div class="profile">
                 <div class="profile-img">
-                    <img src="../views/img/product/img5.jpg">
-                    <h2>John Doe</h2>
-                    <p>user@mail.com</p>
+                    <img src="../views/img/product/unnamed.jpg">
+                    <h2>${user.getUsername()}</h2>
+                    <p>${user.getEmail()}</p>
                 </div>
                 <ul>
-                    <li><a href="account.html" class="active">Account <span>></span></a></li>
-                    <li><a href="orders.html">My Orders <span>></span></a></li>
-                    <li><a href="change-password.html">Change Password <span>></span></a></li>
-                    <li><a href="">Logout <span>></span></a></li>
+                    <li><a href="account">Account <span>></span></a></li>
+                    <li><a href="myOrders" class="active">My Orders <span>></span></a></li>
+                    <li><a href="changepassword">Change Password <span>></span></a></li>
+                    <li><a href="logout">Logout <span>></span></a></li>
                 </ul>
             </div>
             <div class="account-detail">
@@ -158,30 +67,30 @@
                         </tr>
                         </thead>
                         <tbody>
+                        <% while (rs.next()) {%>
                         <tr>
-                            <td>06-02-2020</td>
-                            <td>61245231241</td>
-                            <td>2,150</td>
+                            <td><%= rs.getString(2)%></td>
+                            <td>61245231<%= rs.getInt(1)%></td>
+                            <td><%= rs.getInt(3)%>.00 Birr</td>
+
+                            <% if(rs.getInt(5) == 1){%>
                             <td>Cash</td>
-                            <td>Pending</td>
+                            <%}else if(rs.getInt(5)== 2){%>
+                            <td>Telebirr</td>
+                            <%}else if(rs.getInt(5)== 3){%>
+                            <td>Bank</td>
+                            <%}%>
+
+                                <% if(rs.getInt(4) == 0){%>
+                                    <td>pending</td>
+                            <%}else{%>
+                            <td>delivered</td>
+                            <%}%>
+
+                            </td>
                             <td><a href="#">View</a></td>
                         </tr>
-                        <tr>
-                            <td>08-02-2020</td>
-                            <td>612467771245</td>
-                            <td>5,000</td>
-                            <td>Cash</td>
-                            <td>Pending</td>
-                            <td><a href="#">View</a></td>
-                        </tr>
-                        <tr>
-                            <td>15-08-2020</td>
-                            <td>612874511233</td>
-                            <td>3000</td>
-                            <td>Cash</td>
-                            <td>Pending</td>
-                            <td><a href="#">View</a></td>
-                        </tr>
+                        <%}%>
                         </tbody>
                     </table>
                 </div>
@@ -189,76 +98,12 @@
         </div>
     </main> <!-- Main Area -->
 </div>
-
-<footer>
-    <div class="container">
-        <div class="footer-widget">
-            <div class="widget">
-                <div class="widget-heading">
-                    <h3>Important Link</h3>
-                </div>
-                <div class="widget-content">
-                    <ul>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="refund.html">Refund Policy</a></li>
-                        <li><a href="terms.html">Terms & Conditions</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="widget">
-                <div class="widget-heading">
-                    <h3>Information</h3>
-                </div>
-                <div class="widget-content">
-                    <ul>
-                        <li><a href="account.html">My Account</a></li>
-                        <li><a href="orders.html">My Orders</a></li>
-                        <li><a href="cart.html">Cart</a></li>
-                        <li><a href="checkout.html">Checkout</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="widget">
-                <div class="widget-heading">
-                    <h3>Follow us</h3>
-                </div>
-                <div class="widget-content">
-                    <div class="follow">
-                        <ul>
-                            <li><a href="#"><img src="../views/img/icons/facebook.png"></a></li>
-                            <li><a href="#"><img src="../views/img/icons/twitter.png"></a></li>
-                            <li><a href="#"><img src="../views/img/icons/instagram.png"></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="widget-heading">
-                    <h3>Subscribe for Newsletter</h3>
-                </div>
-                <div class="widget-content">
-                    <div class="subscribe">
-                        <form>
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="subscribe" placeholder="Email">
-                                <img src="../views/img/icons/paper_plane.png">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- Footer Widget -->
-        <div class="footer-bar">
-            <div class="copyright-text">
-                <p>Copyright 2021 - All Rights Reserved</p>
-            </div>
-            <div class="payment-mode">
-                <img src="../views/img/icons/paper_money.png">
-                <img src="../views/img/icons/visa.png">
-                <img src="../views/img/icons/mastercard.png">
-            </div>
-        </div> <!-- Footer Bar -->
-    </div>
-</footer> <!-- Footer Area -->
+<%
+} catch (Exception e) {
+    System.out.println("Exception: " + e);
+}
+%>
+<%@include file="common/footer.jspf"%>
 
 </body>
 

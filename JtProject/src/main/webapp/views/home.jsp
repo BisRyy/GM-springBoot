@@ -96,7 +96,7 @@
             %>
                 <div class="product">
                     <a href="product?pid=<%= rs.getString(1) %>">
-                        <img src="../views/img/product/img<%= rs.getString(7) %>">
+                        <img src="../views/img/product/img<%= rs.getString(1)%>.jpg">
                     </a>
                     <div class="product-detail">
                         <h3>
@@ -105,7 +105,7 @@
                         <h2>
                             <%= rs.getString(2) %>
                         </h2>
-                        <a href="cart/add?pid=<%= rs.getString(1) %>">Add to Cart</a>
+                        <a href="cart/add?pid=<%= rs.getString(1) %>&qty=10">Add to Cart</a>
                         <p>
                             <%= rs.getInt(3) %> Birr.
                         </p>
@@ -127,7 +127,7 @@
                 <h2>Grain Collection</h2>
             </div>
             <div class="women-collection">
-                <h2>Flour Collection</h2>
+                <h2>Rice Collection</h2>
             </div>
         </div> <!-- Collection Section -->
 

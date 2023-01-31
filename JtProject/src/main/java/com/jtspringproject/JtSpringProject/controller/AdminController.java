@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.*;
+import java.util.Objects;
 
 @Controller
 public class AdminController {
@@ -15,7 +16,7 @@ public class AdminController {
     public static String usernameforclass = "";
 
     public static Buyer currentUser;
-    Product currentProduct = new Product();
+    static Product currentProduct = new Product();
 
     @RequestMapping(value = {"/"})
     public String returnHome() {
@@ -45,16 +46,9 @@ public class AdminController {
 //            currentProduct.setId(pid);
             ResultSet rs = stmt.executeQuery("select * from products left  join categories c on c.category_id = products.category_id where id="+pid);
             if (rs.next()){
-                currentProduct.setId(pid);
-                currentProduct.setName(rs.getString(2));
-                currentProduct.setPrice(rs.getInt(3));
-                currentProduct.setMprice(rs.getString(4));
-                currentProduct.setCategoryId(rs.getInt(5));
-                currentProduct.setQuantity(rs.getInt(6));
-                currentProduct.setImage(rs.getString(7));
-                currentProduct.setInfo(rs.getString(8));
-                currentProduct.setDescription(rs.getString(9));
-                currentProduct.setCategory(rs.getString(11));
+
+                mapProductDetail(pid, rs, currentUser);
+
                 model.addAttribute("product", currentProduct);
             }
 
@@ -170,7 +164,8 @@ public class AdminController {
 
 
     @GetMapping("/cart/add")
-    public String addToCart(@RequestParam("pid") int pid, Model model) {
+    public String addToCart(@RequestParam("pid") int pid,
+                            @RequestParam("qty") int qty, Model model) {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -179,7 +174,7 @@ public class AdminController {
 
             pst.setInt(1, currentUser.getId());
             pst.setInt(2, pid);
-            pst.setInt(3, 10);
+            pst.setInt(3, qty);
             int i = pst.executeUpdate();
 
         } catch (Exception e) {
@@ -243,35 +238,46 @@ public class AdminController {
     }
 
     @RequestMapping(value = "addStk", method = RequestMethod.POST)
-    public String addStk(@RequestParam("pqty") String quantity, @RequestParam("pname") int pid){
+    public String addStk(@RequestParam("pqty") int quantity, @RequestParam("pname") int pid){
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/grainmill", "bisry", "password");
             Statement stmt = con.createStatement();
-
+            ResultSet rst = stmt.executeQuery("select * from products where id ="+ pid);
             PreparedStatement pst = con.prepareStatement("update products set quantity = ? where id="+ pid);
-            pst.setString(1, quantity);
+            rst.next();
+            quantity += rst.getInt(6);
+            pst.setInt(1, quantity);
             int i = pst.executeUpdate();
 
         } catch (Exception e) {
             System.out.println("Exception:" + e);
         }
 
-        return "redirect:/addCategory";
+        return "redirect:/addStock";
     }
 
 
     //    ============================
     @RequestMapping(value = {"/logout"})
-    public String returnIndex() {
+    public String returnIndex(Model model) {
         adminlogcheck = 0;
         usernameforclass = "";
         currentUser = new Buyer();
+        model.addAttribute("message", "Logged out Successfully");
         return "userLogin";
     }
 
-
+    @RequestMapping(value = {"/ulogout"})
+    public String returnIndexUpdate(Model model,
+                                    @RequestParam("s") String s) {
+        adminlogcheck = 0;
+        usernameforclass = "";
+        currentUser = new Buyer();
+        model.addAttribute("message", s);
+        return "userLogin";
+    }
 
     @GetMapping("/template")
     public String getTemplate(Model model) {
@@ -486,10 +492,10 @@ public class AdminController {
             @RequestParam("phone") String phone,
             @RequestParam("address") String address) {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/springproject", "bisry", "password");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/grainmill", "bisry", "password");
 
-            PreparedStatement pst = con.prepareStatement("update users set username= ?,email = ?,f_name= ?,l_name=?, image=?, address= ? , phone=? where uid = ?;");
+            PreparedStatement pst = con.prepareStatement("update users set username= ?,email = ?,f_name= ?,l_name=?, image=?, address= ? , phone=? where user_id = ?;");
             pst.setString(1, username);
             pst.setString(2, email);
             pst.setString(3, f_name);
@@ -498,12 +504,53 @@ public class AdminController {
             pst.setString(6, address);
             pst.setString(7, phone);
             pst.setInt(8, currentUser.getId());
+
             int i = pst.executeUpdate();
             usernameforclass = username;
+
+            return "redirect:/ulogout?s=Updated. Please Log in to confirm.";
         } catch (Exception e) {
             System.out.println("Exception:" + e);
         }
-        return "redirect:/index";
+        return "redirect:/ulogout?s=Unable to update.";
+    }
+
+    @RequestMapping(value = "changepass", method = RequestMethod.POST)
+    public String updateUserProfile(
+            @RequestParam("old_password") String oPass,
+            @RequestParam("new_password") String nPass,
+            @RequestParam("confirm_password") String cPass) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/grainmill", "bisry", "password");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from users where user_id ="+currentUser.getId());
+            rs.next();
+            if (Objects.equals(nPass, cPass) && Objects.equals(oPass, rs.getString(5))){
+                PreparedStatement pst = con.prepareStatement("update users set password= ? where user_id = ?;");
+                pst.setString(1, nPass);
+                pst.setInt(2, currentUser.getId());
+                int i = pst.executeUpdate();
+
+                return "redirect:/ulogout?s=Password Changed. Please Log in.";
+            }
+
+        } catch (Exception e) {
+            System.out.println("Exception:" + e);
+        }
+        return "redirect:/ulogout?s=Incorrect Password.";
+    }
+    public static void mapProductDetail(int uid, ResultSet rs, Person currentUser) throws SQLException {
+        currentProduct.setId(uid);
+        currentProduct.setName(rs.getString(2));
+        currentProduct.setPrice(rs.getInt(3));
+        currentProduct.setMprice(rs.getString(4));
+        currentProduct.setCategoryId(rs.getInt(5));
+        currentProduct.setQuantity(rs.getInt(6));
+        currentProduct.setImage(rs.getString(7));
+        currentProduct.setInfo(rs.getString(8));
+        currentProduct.setDescription(rs.getString(9));
+        currentProduct.setCategory(rs.getString(11));
     }
 
 }

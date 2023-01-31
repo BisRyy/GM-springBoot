@@ -4,7 +4,6 @@
 <head>
     <!-- Meta Tags -->
     <meta charset="UTF-8">
-    <meta name="author" content="Kamran Mubarik">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Title -->
     <title>E-Commerce Online Shop</title>
@@ -15,114 +14,15 @@
 </head>
 <body>
 
-<header>
-    <div class="container">
-        <div class="brand">
-            <div class="logo">
-                <a href="index.html">
-                    <img src="../views/img/icons/online_shopping.png">
-                    <div class="logo-text">
-                        <p class="big-logo">Ecommerce</p>
-                        <p class="small-logo">online shop</p>
-                    </div>
-                </a>
-            </div> <!-- logo -->
-            <div class="shop-icon">
-                <div class="dropdown">
-                    <img src="../views/img/icons/account.png">
-                    <div class="dropdown-menu">
-                        <ul>
-                            <li><a href="account.html">My Account</a></li>
-                            <li><a href="orders.html">My Orders</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <img src="../views/img/icons/heart.png">
-                    <div class="dropdown-menu wishlist-item">
-                        <table border="1">
-                            <thead>
-                            <tr>
-                                <th>Image</th>
-                                <th>Product Name</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><img src="../views/img/product/img1.jpg"></td>
-                                <td>product name</td>
-                            </tr>
-                            <tr>
-                                <td><img src="../views/img/product/img2.jpg"></td>
-                                <td>product name</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <img src="../views/img/icons/shopping_cart.png">
-                    <div class="dropdown-menu cart-item">
-                        <table border="1">
-                            <thead>
-                            <tr>
-                                <th>Image</th>
-                                <th>Product Name</th>
-                                <th class="center">Price</th>
-                                <th class="center">Qty.</th>
-                                <th class="center">Amount</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><img src="../views/img/product/img1.jpg"></td>
-                                <td>product name</td>
-                                <td class="center">1200</td>
-                                <td class="center">2</td>
-                                <td class="center">2400</td>
-                            </tr>
-                            <tr>
-                                <td><img src="../views/img/product/img2.jpg"></td>
-                                <td>product name</td>
-                                <td class="center">1500</td>
-                                <td class="center">2</td>
-                                <td class="center">3000</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div> <!-- shop icons -->
-        </div> <!-- brand -->
-
-        <div class="menu-bar">
-            <div class="menu">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div class="search-bar">
-                <form>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="search" placeholder="Search">
-                        <img src="../views/img/icons/search.png">
-                    </div>
-                </form>
-            </div>
-        </div> <!-- menu -->
-    </div> <!-- container -->
-</header> <!-- header -->
+<%@include file="common/header.jspf"%>
 
 <div class="container">
     <main>
         <div class="breadcrumb">
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index">Home</a></li>
                 <li> / </li>
-                <li><a href="account.html">Account</a></li>
+                <li><a href="account">Account</a></li>
                 <li> / </li>
                 <li>Change Password</li>
             </ul>
@@ -132,33 +32,33 @@
         <div class="account-page">
             <div class="profile">
                 <div class="profile-img">
-                    <img src="../views/img/product/img5.jpg">
-                    <h2>John Doe</h2>
-                    <p>user@mail.com</p>
+                    <img src="../views/img/product/unnamed.jpg">
+                    <h2>${user.getUsername()}</h2>
+                    <p>${user.getEmail()}</p>
                 </div>
                 <ul>
-                    <li><a href="account.html" class="active">Account <span>></span></a></li>
-                    <li><a href="orders.html">My Orders <span>></span></a></li>
-                    <li><a href="change-password.html">Change Password <span>></span></a></li>
-                    <li><a href="">Logout <span>></span></a></li>
+                    <li><a href="account">Account <span>></span></a></li>
+                    <li><a href="myOrders">My Orders <span>></span></a></li>
+                    <li><a href="changepassword" class="active">Change Password <span>></span></a></li>
+                    <li><a href="logout">Logout <span>></span></a></li>
                 </ul>
             </div>
             <div class="account-detail">
                 <h2>Change Password</h2>
                 <div class="billing-detail">
-                    <form class="checkout-form">
+                    <form class="checkout-form" action="changepass" method="post">
                         <div class="form-group">
                             <label>Old Password</label>
-                            <input type="password" id="old_password" name="old_password">
+                            <input type="password" id="old_password" name="old_password" required>
                         </div>
                         <div class="form-inline">
                             <div class="form-group">
                                 <label>New Password</label>
-                                <input type="password" id="new_password" name="new_password">
+                                <input type="password" id="new_password" name="new_password" required>
                             </div>
                             <div class="form-group">
                                 <label>Confirm Password</label>
-                                <input type="password" id="confirm_password" name="confirm_password">
+                                <input type="password" id="confirm_password" name="confirm_password" required>
                             </div>
                         </div>
                         <div class="form-group">

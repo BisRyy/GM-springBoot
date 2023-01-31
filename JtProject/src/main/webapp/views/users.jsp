@@ -1,3 +1,4 @@
+<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,8 +55,53 @@
                 <li><a class="active" href="users">Users</a></li>
             </ul>
         </div>
+        <div class="content">
+            <h3>Users</h3>
+            <div class="content-detail">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Country</th>
+                        <th>city</th>
+                        <th>Address</th>
+                    </tr>
+                    </thead>
+                    <%
+                        try {
+                            String url = "jdbc:mysql://localhost:3306/grainmill";
+                            Class.forName("com.mysql.cj.jdbc.Driver");
+                            Connection con = DriverManager.getConnection(url, "bisry", "password");
+                            Statement stmt = con.createStatement();
+                            ResultSet rs = stmt.executeQuery("select username, f_name, l_name, email, phone, country, city, address from users");
+                    %>
+                    <tbody>
+                    <% while (rs.next()) {%>
+                    <tr>
+                        <td><%= rs.getString(1)%></td>
+                        <td><%= rs.getString(2)%></td>
+                        <td><%= rs.getString(3)%></td>
+                        <td><%= rs.getString(4)%></td>
+                        <td><%= rs.getString(5)%></td>
+                        <td><%= rs.getString(6)%></td>
+                        <td><%= rs.getString(7)%></td>
+                        <td><%= rs.getString(8)%></td>
+                    </tr>
+                    <%}%>
+                    </tbody>
+                    <%
+                        } catch (Exception e) {
+                            System.out.println("Exception: " + e);
+                        }
+                    %>
+                </table>
+            </div>
+        </div>
     </div>
-
 </main> <!-- Main Area -->
 
 <footer>

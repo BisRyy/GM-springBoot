@@ -1,3 +1,4 @@
+<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,17 +44,20 @@
 						</tr>
 						</thead>
 						<tbody>
-						<tr>
-							<td>Blue Jeans</td>
-							<td>1500</td>
-							<td>Pants</td>
-							<td>2</td>
-						</tr>
+<%--						<% while (rs1.next()) {%>--%>
+<%--						<tr>--%>
+<%--							<td><%= rs1.getString(2)%></td>--%>
+<%--							<td>61245231<%= rs1.getInt(1)%></td>--%>
+<%--							<td><%= rs1.getString(6)%></td>--%>
+<%--							<td><%= rs1.getInt(3)%>.00 Birr</td>--%>
+
+<%--							<td><a href="#">View</a></td>--%>
+<%--						</tr>--%>
+<%--						<%}%>--%>
 						</tbody>
 					</table>
-				</div>
-				<div class="content-detail">
-					<h4>Recent Order</h4>
+					<br><br>
+					<h4>Recent Orders</h4>
 					<table>
 						<thead>
 						<tr>
@@ -64,15 +68,31 @@
 							<th>View</th>
 						</tr>
 						</thead>
+						<%
+							try {
+								String url = "jdbc:mysql://localhost:3306/grainmill";
+								Class.forName("com.mysql.cj.jdbc.Driver");
+								Connection con = DriverManager.getConnection(url, "bisry", "password");
+								Statement stmt = con.createStatement();
+								ResultSet rs = stmt.executeQuery("select id, date , price, status, pmode, username from `order` join users on order.userId = users.user_id ");
+						%>
 						<tbody>
+						<% while (rs.next()) {%>
 						<tr>
-							<td>11-05-2020</td>
-							<td>15895452</td>
-							<td>Kamran</td>
-							<td>1500</td>
-							<td>View</td>
+							<td><%= rs.getString(2)%></td>
+							<td>61245231<%= rs.getInt(1)%></td>
+							<td><%= rs.getString(6)%></td>
+							<td><%= rs.getInt(3)%>.00 Birr</td>
+
+							<td><a href="#">View</a></td>
 						</tr>
+						<%}%>
 						</tbody>
+						<%
+							} catch (Exception e) {
+								System.out.println("Exception: " + e);
+							}
+						%>
 					</table>
 				</div>
 				<div class="content-detail">
@@ -87,15 +107,32 @@
 							<th>View</th>
 						</tr>
 						</thead>
+						<%
+							try {
+								String url = "jdbc:mysql://localhost:3306/grainmill";
+								Class.forName("com.mysql.cj.jdbc.Driver");
+								Connection con = DriverManager.getConnection(url, "bisry", "password");
+								Statement stmt = con.createStatement();
+								ResultSet rs = stmt.executeQuery("select id, date , price, status, pmode, username from `order` join users on order.userId = users.user_id where status = 1 ");
+						%>
+
 						<tbody>
+						<% while (rs.next()) {%>
 						<tr>
-							<td>11-05-2020</td>
-							<td>15895452</td>
-							<td>Kamran</td>
-							<td>1500</td>
-							<td>View</td>
+							<td><%= rs.getString(2)%></td>
+							<td>61245231<%= rs.getInt(1)%></td>
+							<td><%= rs.getString(6)%></td>
+							<td><%= rs.getInt(3)%>.00 Birr</td>
+
+							<td><a href="#">View</a></td>
 						</tr>
+						<%}%>
 						</tbody>
+						<%
+							} catch (Exception e) {
+								System.out.println("Exception: " + e);
+							}
+						%>
 					</table>
 				</div>
 			</div>
