@@ -49,7 +49,7 @@
         <h2>Billing Detail</h2>
         <div class="checkout-page">
             <div class="billing-detail">
-                <form class="checkout-form">
+                <form class="checkout-form" action="check" method="post">
                     <h4>Shipping Detail</h4>
                     <div class="form-inline">
                         <div class="form-group">
@@ -112,7 +112,6 @@
                         <label for="note">Order Note</label>
                         <textarea style="resize:none" id="note" name="address" rows="3"></textarea>
                     </div>
-                </form>
             </div> <!-- End of Billing Detail-->
             <%
                 try {
@@ -127,7 +126,6 @@
                     float mtotal = 0;
             %>
             <div class="order-summary">
-                <form action="check" method="post">
                 <div class="checkout-total">
                     <h3>Order Summary</h3>
                     <ul>
