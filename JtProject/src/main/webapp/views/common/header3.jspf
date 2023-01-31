@@ -16,9 +16,9 @@
                     <img src="../../views/img/icons/account.png">
                     <div class="dropdown-menu">
                         <ul>
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Settings</a></li>
-                            <li><a href="#">Logout</a></li>
+                            <li><a href="account">My Account</a></li>
+                            
+                            <li><a href="logout">Logout</a></li>
                         </ul>
                     </div>
                 </div>
