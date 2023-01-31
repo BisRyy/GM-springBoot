@@ -22,7 +22,7 @@
                 <div class="widget-content">
                     <ul>
                         <li><a href="/account">My Account</a></li>
-                        <li><a href="/orders">My Orders</a></li>
+                        <li><a href="/myOrders">My Orders</a></li>
                         <li><a href="/cart">Cart</a></li>
                         <li><a href="/checkout">Checkout</a></li>
                     </ul>
