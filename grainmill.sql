@@ -231,3 +231,5 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2023-01-31 13:39:07
+CREATE USER 'bisry' identified by 'password';
+grant all privileges on *.* to 'bisry';
