@@ -19,7 +19,7 @@
 -- Current Database: `grainmill`
 --
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `grainmill` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `grainmill` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 ;
 
 USE `grainmill`;
 
@@ -69,7 +69,8 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES (1,'milled'),(2,'rice'),(12,'grain'),(13,'Flours'),(14,'Beans'),(15,'Other'),(16,''),(17,'Flours'),(18,'Aters');
+INSERT INTO `categories` VALUES (1,'milled'),(2,'rice'),(12,'grain'),(13,'Flours'),(14,'Beans'),(15,'Other');
+
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -216,7 +217,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin','admin','admin','123','ROLE_ADMIN',1,'admin.jpg','admin@gmail.com',NULL,NULL,NULL,NULL,NULL),(2,'user','user','user','123','ROLE_USER',1,'user.jpg','user@gmail.com',NULL,NULL,NULL,NULL,NULL),(3,'Bisrat','Kebere','bisry','X9jW2SFT5GgthM2@','ROLE_USER',NULL,'','kiyyakebere@gmail.com','0925698349',' ',NULL,NULL,NULL),(4,'Debebe','Debele','debe','MHkbxkeRb99KmPX','ROLE_USER',NULL,'profile.jpg','abc@abc.com',NULL,NULL,NULL,NULL,NULL),(5,'Birhanu','Worku','birhanu','1234','ROLE_USER',NULL,'profile.jpg','abc@abc.com',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `users` VALUES (1,'admin','admin','admin','123','ROLE_ADMIN',1,'admin.jpg','admin@gmail.com',NULL,NULL,NULL,NULL,NULL),(2,'user','user','user','123','ROLE_USER',1,'user.jpg','user@gmail.com',NULL,NULL,NULL,NULL,NULL),(3,'Bisrat','Kebere','bisry','X9jW2SFT5GgthM2@','ROLE_USER',NULL,'','dev@bisrat.tech','0925698349',' ',NULL,NULL,NULL),(4,'Debebe','Debele','debe','MHkbxkeRb99KmPX','ROLE_USER',NULL,'profile.jpg','abc@abc.com',NULL,NULL,NULL,NULL,NULL),(5,'Birhanu','Worku','birhanu','1234','ROLE_USER',NULL,'profile.jpg','abc@abc.com',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
